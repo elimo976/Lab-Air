@@ -1,0 +1,51 @@
+<div id="accordion" ngbAccordion #accordion="ngbAccordion">
+    <div id="categorie" class="container p-0" ngbAccordionItem="categorie">
+        <h2 ngbAccordionHeader>
+            <button ngbAccordionButton (click)="onClickGetCategories()">Categoria</button>
+        </h2>
+        <div ngbAccordionCollapse>
+            <div ngbAccordionBody *ngFor="let cat of categories">
+                <a href="" class="text-decoration-none text-secondary" [routerLink]="['/list/category', cat]">{{cat}}</a>
+            </div>
+        </div>
+    </div>
+    <div id="prezzi" class="container p-0" ngbAccordionItem="prezzi">
+        <h2 ngbAccordionHeader>
+            <button ngbAccordionButton>Prezzo</button>
+        </h2>
+        <div ngbAccordionCollapse>
+            <div ngbAccordionBody>
+                <div>
+                    <div class="form-check mb-1">
+                        <input class="form-check-input" type="checkbox" value="" id="low" [(ngModel)]="lowPrice" (change)="onPriceFilterChange()">
+                        <label class="form-check-label text-secondary" for="low">
+                          Inferiore a 100€
+                        </label>
+                      </div>
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" type="checkbox" value="" id="medium" [(ngModel)]="mediumPrice" (change)="onPriceFilterChange">
+                        <label class="form-check-label text-secondary" for="medium">
+                          100€ - 150€
+                        </label>
+                      </div>
+                      <div class="form-check mb-1">
+                        <input class="form-check-input" type="checkbox" value="" id="high" [(ngModel)]="highPrice" (change)="onPriceFilterChange">
+                        <label class="form-check-label text-secondary" for="high">
+                          Superiore a 150€
+                        </label>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="colori" class="container p-0" ngbAccordionItem="colori">
+        <h2 ngbAccordionHeader>
+            <button ngbAccordionButton>Colore</button>
+        </h2>
+        <div ngbAccordionCollapse>
+            <div ngbAccordionBody>
+                <div>Scelta colori</div>
+            </div>
+        </div>
+    </div>
+</div>

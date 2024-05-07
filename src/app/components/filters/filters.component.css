@@ -1,0 +1,37 @@
+#accordion {
+    font-size: 1rem;
+}
+
+#accordion label {
+    font-size: 1.5rem;
+    color: #4e4e4e;
+}
+
+.form-control {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.form-control:focus {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+#prezzi label {
+    font-size: 1rem;
+}
+
+
+@media screen and (max-width: 768px) {
+    #accordion {
+        font-size: .9rem;
+    }
+    
+    #accordion label {
+        font-size: .9rem;
+    }
+    #accordion button {
+        font-size: .9rem;
+    }
+}

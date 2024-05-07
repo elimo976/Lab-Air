@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-between" id="titolo">
+    <h4 class="pt-3">{{title}}</h4>
+    <div id="arrows" class="d-flex justify-content-between">
+        <span class="mt-4 me-5" (click)="previousSlide()">
+            <i class="bi bi-arrow-left-circle"></i>
+        </span>
+        <span class="mt-4 me-5" (click)="nextSlide()">
+            <i class="bi bi-arrow-right-circle"></i>
+        </span>
+    </div>
+</div>
+<div class="slider">
+    <div class="slider-inner">
+        <div *ngFor="let item of currentItems">
+            <img [src]="item.imageUrl" alt="{{ item.title }}">
+        </div>
+    </div>
+</div>

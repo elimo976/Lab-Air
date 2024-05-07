@@ -1,0 +1,27 @@
+<header class="header-container">
+  <div class="microbanner microbanner-top">
+    <p class="microbanner-text"><a [href]="microbannersLinks">{{currentText}}</a></p>
+  </div>
+  <nav class="navbar">
+    <input type="checkbox" id="hamburger-icon" class="hamburger-icon">
+    <ul class="navbar-menu navbar-menu-right">
+      <li class="navbar-item"><a routerLink="/construction">aiuto</a></li>
+      <li class="navbar-item"><a routerLink="/construction">ordini e resi</a></li>
+      <li class="navbar-item"><a routerLink="/construction">iscriviti</a></li>
+      <li class="navbar-item"><a routerLink="/construction">labclub</a></li>
+      <li class="navbar-item"><a routerLink="/construction">accedi</a></li>
+    </ul>
+    <input type="checkbox" class="hamburger-icon">
+    <label for="hamburger-icon" class="hamburger-menu">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </label>
+  </nav>
+
+  <app-navbar></app-navbar>
+
+  <div class="microbanner microbanner-bottom">
+    <p class="microbanner-text">Accogli l'estate con un look radioso e allegro. <a [routerLink]="['/list']" (click)="loadAllProducts()">ACQUISTA!</a></p>
+  </div>
+</header>

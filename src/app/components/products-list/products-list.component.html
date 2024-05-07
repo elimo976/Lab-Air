@@ -1,0 +1,38 @@
+<app-header></app-header>
+<div id="container">
+    <div class="row m-0">
+        <!-- Aside -->
+        <div class="col-lg-3 p-3 containerAside">
+            <app-aside></app-aside>
+            <button id="reset" class="btn btn-outline-warning ms-3 mt-5 p-2" (click)="loadAllProducts()">Resetta
+                filtri</button>
+        </div>
+        <!-- Componente con le cards -->
+        <div class="row g-4 my-4 pe-3 containerCards">
+            <ng-container *ngIf="products && products.length > 0">
+                <ng-container *ngFor="let p of products | filterByName: query | keyvalue | slice: pageSize * page : pageSize * (page + 1)">
+                  <ng-container>
+                    <app-products-preview class="cards" [product]="p.value"></app-products-preview>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            <ng-template #noResults>
+                <p *ngIf="products && products.length ===0 && isLoading" class="noResult">Nessun articolo corrispondente
+                    al termine di ricerca.</p>
+            </ng-template>
+            <ng-container #loading *ngIf="products && products.length === 0">
+                <app-spinner></app-spinner>
+            </ng-container>
+        </div>
+
+        <div id="paginationContainer">
+            <ngb-pagination
+            style="margin-left: 3em; max-width: max-content;"
+            [(page)]="page"
+            [pageSize]="pageSize"
+            [collectionSize]="products.length"
+            (pageChange)="page = $event -1" />
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,34 @@
+#titolo h4 {
+    color: #2f2e2e;
+}
+
+#titolo span {
+    color: #679d1b;
+}
+
+#titolo span:hover {
+    color: #4f7617;
+}
+
+#titolo span i {
+    font-size: 2rem;
+}
+
+.slider {
+    display: flex;
+    overflow: hidden;
+}
+
+.slider-inner {
+    width: 300%;
+    display: flex;
+    gap: 10px;
+    transition: transform 0.5s ease;
+}
+
+.slider-inner img {
+    height: 100%;
+    object-fit: contain;
+    width: 23.5em;
+    padding-left: 0;
+}

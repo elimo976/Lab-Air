@@ -1,0 +1,496 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.wrap {
+    max-width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    color: #333;
+    background-color: #fff;
+}
+
+.header-container {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    position: relative;
+}
+
+.microbanner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.4em;
+}
+
+.microbanner-top {
+    background-color: #679d1b;
+}
+
+.microbanner-top p {
+    padding-top: .8em;
+}
+
+.microbanner-top a {
+    color: #fff;
+    text-decoration: none;
+    font-size: .8em;
+}
+
+.microbanner-top:hover {
+    background-color: #4f7617;
+}
+
+.microbanner-bottom {
+    background-color: #f0f0f0;
+    color: #2f2e2e;
+    font-size: 0.8em;
+    padding-top: 1.3em;
+}
+
+.microbanner-bottom a {
+    color: #2f2e2e;
+}
+
+.microbanner-bottom a:hover {
+    color: #747474;
+}
+
+.microbanner-text {
+    font-size: 1.2em;
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 2.4em;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style-type: none;
+}
+
+.navbar-item {
+    padding: 5px 10px;
+}
+
+.navbar-item a {
+    color: #2f2e2e;
+    text-decoration: none;
+}
+
+.navbar-item a:hover {
+    color: #747474;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5em;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 2.3em 20px;
+    width: 85px;
+}
+
+.logo img {
+    width: 100%;
+}
+
+.main-menu {
+    justify-content: center;
+    align-items: center;
+}
+
+.main-menu ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+}
+
+.sub-container {
+    position: absolute;
+    top: 80%;
+    left: 0;
+    padding-bottom: 1.5em;
+    width: 100%;
+    min-height: 22em;
+    background-color: #ffffff;
+    color: #2f2e2e;
+    z-index: 1000;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    text-align: center;
+}
+
+.sub-container.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sub-container li a {
+    color: #747474;
+}
+
+.submenu1,
+.submenu2,
+.submenu3,
+.submenu4,
+.submenu4kids {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+.submenuInEvidenza {
+    margin-bottom: 2.5em;
+}
+
+.inEvidenza a {
+    white-space: nowrap;
+}
+
+.submenu1 {
+    max-height: 16em;
+    margin-left: 2em;
+}
+
+.submenu4 {
+    max-height: 18em;
+}
+
+.submenu4kids {
+    max-height: 12em;
+    margin-right: 2em;
+}
+
+.submenu-container {
+    width: 100%;
+}
+
+.submenu-item {
+    list-style: none;
+}
+
+li.submenu-item a:hover {
+    color: #2b2b2b;
+    border-bottom: none;
+}
+
+.menu-item {
+    padding: 5px 10px;
+}
+
+.menu-item a {
+    color: #2f2e2e;
+    text-decoration: none;
+    padding-bottom: .5rem;
+
+}
+
+.menu-item a:hover {
+    color: #747474;
+    border-bottom: #679d1b 1px solid;
+}
+
+.menu-list {
+    width: 50%;
+    margin-left: 8em;
+}
+
+.right-side {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.searchbar {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.icon-container {
+    margin-left: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.4em;
+}
+
+.icon img {
+    width: 100%;
+}
+
+.icon img:hover {
+    opacity: 70%;
+}
+
+.hamburger-menu {
+    display: none;
+}
+
+.hamburger-icon {
+    display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+    .header-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 11em;
+    }
+
+    .logo {
+        flex-grow: 1;
+        position: absolute;
+        top: 35%;
+        left: 0;
+        margin-left: 2em;
+    }
+
+    .microbanner-top p {
+        padding-top: .6em;
+    }
+
+    .microbanner-top a {
+        font-size: .7em;
+    }
+
+    .right-side {
+        width: 50%;
+        position: absolute;
+        top: 35%;
+        left: 30%;
+    }
+
+    .main-menu {
+        margin-left: 6.5em;
+        margin-top: 2.7em;
+    }
+
+    .navbar {
+        position: relative;
+    }
+
+    .navbar-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 45%;
+        background-color: #fff;
+        box-shadow: 0 2px 4px #0000001a;
+        text-align: center;
+        z-index: 1000;
+    }
+
+    .navbar-item {
+        margin: 0;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .navbar-item a:hover {
+        color: #679d1b;
+    }
+
+    .hamburger-menu {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .line {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background-color: #333;
+        margin: 5px auto;
+    }
+
+    .hamburger-icon {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .hamburger-icon:checked~.navbar-menu {
+        display: block;
+    }
+
+    .hamburger-icon:checked~.hamburger-menu .line:nth-child(1) {
+        opacity: 0;
+    }
+
+    .hamburger-icon:checked~.hamburger-menu .line:nth-child(3) {
+        opacity: 0;
+    }
+
+    .sub-container {
+        top: 80%;
+        font-size: .9rem;
+        margin-top: .5em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 9em;
+    }
+
+    .microbanner-top a {
+        font-size: .7em;
+    }
+
+    .microbanner-top p {
+        padding-top: .6em;
+    }
+
+    .microbanner {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: .7em;
+    }
+
+    .logo {
+        flex-grow: 1;
+        position: absolute;
+        top: 30%;
+        left: 35%;
+    }
+
+    .icon-container {
+        display: flex;
+    }
+
+    .icon {
+        margin-right: 10px;
+    }
+
+    .main-menu {
+        width: 100%;
+        align-items: center;
+        margin: 12.5em auto 0 auto;
+        display: flex;
+
+    }
+
+    .main-menu ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .menu-list {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        justify-content: center;
+        background-color: #679d1b;
+        width: 100%;
+        gap: 0;
+    }
+
+    .menu-item {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0 0 0;
+    }
+
+    .menu-list :hover {
+        background-color: #4f7617;
+    }
+
+    .menu-list a:hover {
+        color: #fff;
+    }
+
+    .menu-item a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        border-bottom: #fff 0.5px solid;
+    }
+
+    .microbanner-bottom {
+        font-size: 0.8rem;
+        position: relative;
+        top: 8.3em;
+        height: 2.4rem;
+        margin-bottom: 1em;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .header-content {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .right-side {
+        display: flex;
+        justify-content: center;
+        max-width: 60%;
+        align-items: center;
+        flex-grow: 0;
+        margin: 0 auto;
+        position: absolute;
+        top: 90%;
+    }
+
+    .sub-container {
+        display: none;
+    }
+
+    :host {
+        display: block;
+        min-height: 358px;
+    }
+}

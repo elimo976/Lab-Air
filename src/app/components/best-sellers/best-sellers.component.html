@@ -1,0 +1,7 @@
+<div *ngIf="bestSeller">
+    <i class="bi" *ngFor="let s of stars" [ngClass]="{
+        'bi-star-fill': bestSeller.best_seller >= s,
+        'bi-star':  bestSeller.best_seller < s - 0.5,
+        'bi-star-half': bestSeller.best_seller >= s -0.5 && bestSeller.best_seller < s
+    }"></i>
+</div>

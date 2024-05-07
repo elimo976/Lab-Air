@@ -1,0 +1,14 @@
+<div *ngIf="product">
+    <div class="card h-100">
+        <a [routerLink]="['/product', product.id]">
+            <img [src]="product.immagine" class="card-img-top">
+
+            <div class="card-body">
+                <p>{{product.best_seller}}</p>
+                <h5 class="card-title">{{product.nome}}</h5>
+                <p class="card-text">{{product.categoria}}</p>
+                <p class="card-text">{{product.prezzo | localCurrency: "EUR"}}</p>
+            </div>
+        </a>
+    </div>
+</div>

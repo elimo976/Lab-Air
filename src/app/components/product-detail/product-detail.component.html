@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div id="containerDetail" *ngIf="product">
+
+    <div class="detailSx" *ngIf="product.thumbnails">
+        <section id="thumbanils">
+            <div *ngFor="let thumb of product.thumbnails | keyvalue" (mouseover)="activeThumbnail = thumb.value">
+                <ng-container *ngIf="!isVideo(thumb.value)">
+                    <img [src]="thumb.value" alt="thumbnail" (mouseover)="changeImage(thumb.value)">
+                </ng-container>
+                <ng-container *ngIf="isVideo(thumb.value)">
+                    <video [src]="thumb.value" controls (mouseover)="changeImage(thumb.value)"></video>
+                </ng-container>
+            </div>
+        </section>
+    </div>
+    <div class="detailCenter">
+        <ng-container *ngIf="product.thumbnails">
+            <ngb-carousel *ngIf="product.thumbnails && product.thumbnails | keyvalue" [interval]="0" [wrap]="true">
+                <ng-container *ngFor="let t of product.thumbnails | keyvalue">
+                    <ng-template ngbSlide>
+                        <img *ngIf="!isVideo(t.value)" class="img-fluid" [src]="activeThumbnail || t.value" alt="">
+                        <video *ngIf="isVideo(t.value)" controls muted autoplay preload="auto">
+                            <source [src]="t.value">
+                        </video>
+                    </ng-template>
+                </ng-container>
+            </ngb-carousel>
+        </ng-container>
+        <div *ngIf="!product.thumbnails">
+            <img class="img-fluid" [src]="product.immagine" alt="">
+        </div>
+        <div id="bestSeller" *ngIf="product.best_seller >= 4">
+            <i class="bi-star-fill me-2"></i>
+            <span>Valutazione alta</span>
+        </div>
+    </div>
+
+
+    <div class="detailDx">
+        <h3>{{product.nome}}</h3>
+        <h5>{{product.categoria}}</h5>
+        <p><strong>{{product.prezzo| localCurrency: "EUR"}}</strong></p>
+        <p>{{product.descrizione}}</p>
+        <app-sizes></app-sizes>
+        <p>Colori disponibili: {{product.colori_disponibili | spaceAfterComma}}</p>
+        <app-best-sellers [bestSeller]="product"></app-best-sellers>
+    </div>
+</div>
+<app-footer></app-footer>

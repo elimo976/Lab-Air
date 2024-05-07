@@ -1,0 +1,54 @@
+<div class="overlay" *ngIf="isPopupVisible"></div>
+<div class="overlay" *ngIf="isPopupVisible"></div>
+<div class="containerSizeButton">
+    <div id="containerTitle">
+        <h5>Seleziona la taglia/misura</h5>
+    </div>
+    <div id="containerSizes" class="my-4 mx-0 px-0" [ngClass]="{ 'red-border': !selectedSize && errorMessage }">
+        <div class="row">
+            <div class="col-6 col-md-4" *ngFor="let size of sizesShoes; let i=index;">
+                <button type="button"
+                    class="btn btn-outline-secondary btn-block {{i >= sizesShoes.length - 2 ? 'bottom' : ''}}"
+                    [ngClass]="{ 'black-border': selectedSize === size }" (click)="selectSize(size)">
+                    {{ size.num }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <span *ngIf="errorMessage && !selectedSize" class="text-danger mb-0">{{ errorMessage }}</span>
+    <div id="containerButtons">
+        <button type="button" class="btn btn-dark cart" (click)="addToCart()">Aggiungi al carrello</button>
+        <button type="button" class="btn btn-outline-secondary wish">Aggiungi ai preferiti</button>
+    </div>
+</div>
+
+<!-- POPUP ARTICOLO SCELTO -->
+<div id="popupProduct" *ngIf="isPopupVisible && productDetails">
+    <div id="up">
+        <h6>Aggiunto al carrello<span id="addedToCart"><i class="bi bi-check2-circle"></i></span></h6>
+        <span (click)="closePopup()">
+            <i class="bi bi-x-circle"></i>
+        </span>
+    </div>
+    <section id="boxSelection">
+        <div id="middle">
+            <div class="subMiddleImg"><img [src]="productDetails.immagine" alt=""></div>
+            <div class="subMiddleText">
+                <h5>{{ productDetails.nome }}</h5>
+                <p class="grey">{{ productDetails.categoria }}</p>
+                <p id="size" class="grey">
+                    Taglie selezionate :<br>
+                    <span *ngFor="let selected of selectedSizesArray" (click)="removeSize(selected)">{{ selected.num
+                        }}</span>
+                </p>
+                <p class="messageRemoveSize" *ngIf="selectedSizesArray.length > 0">Seleziona la taglia per rimuoverla
+                </p>
+                <p id="price" class="bold">{{ productDetails.prezzo | localCurrency: 'EUR' }}</p>
+            </div>
+        </div>
+        <div id="fasciaDown" class="clearfix">
+            <button id="addToCart" (click)="closePopup()">Visualizza carrello ({{ countSelectedSizes() }})</button>
+            <button id="goToPay" (click)="closePopup()">Pagamento</button>
+        </div>
+    </section>
+</div>

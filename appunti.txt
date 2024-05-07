@@ -1,0 +1,149 @@
+colore prevalente verde: #679d1b,
+colore titoli e simili: #2f2e2e (quasi nero) con hover: #747474 (grigio),
+grigio sfondi: #f0f0f0,
+colore grigio icone: #3B3A3A,
+background-color hover verde:  #4f7617;
+
+position: absolute min-width: 768px
+.navbar-menu
+.hamburger-menu
+.hamburger-icon
+
+link immagini:
+home
+    trend della settimana:
+
+         scarpe: "https://images.freeimages.com/variants/dFZffRTxCREWh82FF3LeQyCW/f4a36f6589a0e50e702740b15352bc00e4bfaf6f58bd4db850e167794d05993d?fmt=webp&h=350"
+
+        scarpe trekking: "https://media.istockphoto.com/id/96946236/it/foto/scarponcini-da-hiking-per-il-trekking-in-montagna.jpg?s=1024x1024&w=is&k=20&c=gkTi1KoLbenaxze7cQfWc1rJbCHjmaE1WZgw79952Co="
+
+        top fitness: "https://media.istockphoto.com/id/1272778062/it/foto/bella-donna-di-mezza-et%C3%A0-che-ride-dopo-lallenamento.jpg?s=1024x1024&w=is&k=20&c=OjCHOyTFlrsg6NxOXmPD7bzbCgKQoR9DgQbz0lcoa_Y="
+
+        racchette padel: "https://media.istockphoto.com/id/1407091724/it/foto/primo-piano-del-giovane-giocatore-e-oggetti-da-paddle-o-tennis.jpg?s=1024x1024&w=is&k=20&c=7blUkVsGGDzPLmlhrb1gYKg6tuaWpGJs5WtO9ETGkd0="
+
+        divise rugby: "https://media.istockphoto.com/id/1472571427/it/foto/allenamento-delle-giocatrici-di-rugby-femminile.jpg?s=1024x1024&w=is&k=20&c=ka3n3DZFE3KhKYpv3fUef5B_oeS_uxzUukyV6GViBa0="
+
+    novità più interessanti:
+        scarpe: "https://images.pexels.com/photos/1070360/pexels-photo-1070360.jpeg?auto=compress&cs=tinysrgb&w=600"
+
+        mazze da golf: "https://images.pexels.com/photos/9207323/pexels-photo-9207323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+
+        tavole sup: "https://media.istockphoto.com/id/913017692/it/foto/insegnare-al-mio-ragazzo-come-remare.jpg?s=1024x1024&w=is&k=20&c=OCeEYadCVYJnigxFExvLuFr3h561ClxIho1e7ZORiJQ="
+
+        kettlebell: "https://media.istockphoto.com/id/2053695371/it/foto/donna-concentrata-che-si-allena-con-kettlebell-in-un-ambiente-di-palestra.jpg?s=1024x1024&w=is&k=20&c=2ITrFRXkkEqZAwpvRxVcQgv1PtHn85oWV5vH4wq3vdU="
+
+        nastri ginnastica ritmica: "https://media.istockphoto.com/id/1227093134/it/foto/vista-ravvicinata-delle-gambe-da-ginnasta-femminile-in-palestra.jpg?s=1024x1024&w=is&k=20&c=cvEwODKieK4zB1Gsnaq4qtuyaQKLo32Hj-ifK4Ebl94="
+
+        attrezzatura trekking: "https://media.istockphoto.com/id/1369171053/it/foto/gruppo-di-sportivi-cammina-in-montagna-al-tramonto-con-gli-zaini.jpg?s=1024x1024&w=is&k=20&c=olDQg6GpaRyIZI11MpmecYG7wokfIRc6Dy89sYJ-1G4="
+
+    acquista per sport:
+
+       tennis: "https://media.istockphoto.com/id/1351428897/it/foto/palla-da-tennis-sdraiata-sul-campo-concetto-di-stile-di-vita-sano.jpg?s=1024x1024&w=is&k=20&c=PIn2LE5iWBe48qswv3zL640LvSupQKSpZyiqMGZNN-k="
+
+       fitness: "https://images.pexels.com/photos/866027/pexels-photo-866027.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+
+       yoga: "https://media.istockphoto.com/id/1354213603/it/foto/donna-anziana-che-fa-allenamento-a-casa.jpg?s=1024x1024&w=is&k=20&c=MvaGp3E7ugePuvX64YPL6o3DoIqbRnkDdp7cYEo93ww="
+
+       surf: "https://media.istockphoto.com/id/974184626/it/foto/bellissima-surfista-femminile-con-spazio-di-copia.jpg?s=1024x1024&w=is&k=20&c=BwNDj5BqJyXqIDXUk5wG7He-NfUjfTxKfQh5y2i_sws="
+
+       spinning: "https://media.istockphoto.com/id/1497018234/it/foto/persone-forti-e-sane-che-si-allenano.jpg?s=1024x1024&w=is&k=20&c=Pmd3diiy6UfbMeUz3gPYG0rKfgVkogBIdR-2eFBBTM4="
+
+       freestyle bike: "https://images.pexels.com/photos/71104/utah-mountain-biking-bike-biking-71104.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+
+       PRODUCT-DETAIL.TS:
+
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IProduct } from 'src/app/models/product';
+import { ProductService } from 'src/app/services/product.service';
+
+@Component({
+  selector: 'app-product-detail',
+  templateUrl: './product-detail.component.html',
+  styleUrls: ['./product-detail.component.css']
+})
+export class ProductDetailComponent implements OnInit {
+  @Input() product?: IProduct;
+
+  currentImage?: string;
+  currentVideo?: string;
+  activeThumbnail?: string | null;
+
+  constructor(private ps: ProductService, private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.ps.getProductById(params['id']).subscribe(product => {
+        this.product = product;
+        if (this.product) {
+          this.currentImage = this.product.immagine;
+        }
+      });
+    });
+  }
+
+  isVideo(thumb: string): boolean {
+    return thumb.includes('mp4') || thumb.includes('mov');
+  }
+
+  changeImage(src: string): void {
+    if (this.isVideo(src)) {
+      this.currentVideo = src;
+      this.currentImage = "";
+    } else {
+      this.currentImage = src;
+      this.currentVideo = "";
+    }
+  }
+
+}
+
+PRODUCT-DETAIL.HTML:
+
+<app-header></app-header>
+<div id="containerDetail" *ngIf="product">
+
+    <div class="detailSx" *ngIf="product.thumbnails">
+        <section id="thumbanils">
+            <div *ngFor="let thumb of product.thumbnails | keyvalue" (mouseover)="activeThumbnail = thumb.value">
+                <ng-container *ngIf="!isVideo(thumb.value)">
+                    <img [src]="thumb.value" alt="thumbnail" (click)="changeImage(thumb.value)">
+                </ng-container>
+                <ng-container *ngIf="isVideo(thumb.value)">
+                    <video [src]="thumb.value" controls (click)="changeImage(thumb.value)"></video>
+                </ng-container>
+            </div>
+        </section>
+    </div>
+    <div class="detailCenter">
+        <div class="position-relative" *ngIf="product.thumbnails">
+            <ngb-carousel *ngIf="product.thumbnails" [interval]="0" [wrap]="true">
+                <ng-container *ngFor="let t of product.thumbnails | keyvalue">
+                    <ng-template ngbSlide *ngIf="!isVideo(t.value)">
+                        <img class="img-fluid" [src]="activeThumbnail || t.value" alt="">
+                    </ng-template>
+                    <ng-template ngbSlide *ngIf="isVideo(t.value)">
+                        <video [src]="t.value" controls></video>
+                    </ng-template>
+                </ng-container>
+            </ngb-carousel>
+        </div>
+        <div id="bestSeller" *ngIf="product.best_seller >=4">
+            <i class="bi-star-fill me-2"></i>
+            <span>Valutazione alta</span>
+        </div>
+    </div>
+
+    <div class="detailDx">
+        <h3>{{product.nome}}</h3>
+        <h5>{{product.categoria}}</h5>
+        <p><strong>{{product.prezzo| localCurrency: "EUR"}}</strong></p>
+        <p>{{product.descrizione}}</p>
+        <app-sizes></app-sizes>
+        <p>Colori disponibili: {{product.colori_disponibili | spaceAfterComma}}</p>
+        <app-best-sellers [bestSeller]="product"></app-best-sellers>
+    </div>
+</div>
+<app-footer></app-footer>
+
+
