@@ -1,0 +1,9 @@
+.color-label {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: inline-block; /* Consente di posizionare l'etichetta su una riga */
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  

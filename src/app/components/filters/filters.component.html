@@ -48,7 +48,12 @@
         </h2>
         <div ngbAccordionCollapse>
             <div ngbAccordionBody>
-                <div>Scelta colori</div>
+                <div id="colors" *ngIf="colors">
+                    <div *ngFor="let color of colors">
+                        <app-color-label [color]="color"></app-color-label>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

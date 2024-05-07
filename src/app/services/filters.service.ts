@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, map, pipe, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, mergeMap, of, pipe, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { IProduct, ProductDTO } from '../models/product';
 import { ProductService } from './product.service';
@@ -47,58 +47,98 @@ export class FiltersService {
       );
   }
 
-getProductsByBestSeller(best_seller_gte: number, best_seller_lte: number): Observable<IProduct[]> {
-  const url = `${environment.base_url}?best_seller_gte=${best_seller_gte}&best_seller_lte=${best_seller_lte}`
-  return this.http.get<IProduct[]>(url)
-    .pipe(
-      map(
-        (data) => {
-          // console.log("Dati ricevuti:", data);
-          return data;
-        }
-      ),
-      catchError(
-        (error) => {
-          console.error("Si è verificato un errore durante il recupero dei prodotti", error);
-          return throwError(error);
-        }
-      )
+  // filterByBestSeller
+  getProductsByBestSeller(best_seller_gte: number, best_seller_lte: number): Observable<IProduct[]> {
+    const url = `${environment.base_url}?best_seller_gte=${best_seller_gte}&best_seller_lte=${best_seller_lte}`
+    return this.http.get<IProduct[]>(url)
+      .pipe(
+        map(
+          (data) => {
+            // console.log("Dati ricevuti:", data);
+            return data;
+          }
+        ),
+        catchError(
+          (error) => {
+            console.error("Si è verificato un errore durante il recupero dei prodotti", error);
+            return throwError(error);
+          }
+        )
+      );
+  }
+
+  // filterByPrice
+  getProductsByPrice(selectedFilters: string[]): Observable<IProduct[]> {
+    let params = new HttpParams();
+
+    selectedFilters.forEach(filter => {
+      // console.log('Filtro selezionato: ', filter);
+      switch (filter) {
+        case 'lowPrice':
+          params = params.set('prezzo_lte', '99');
+          // console.log('Applicando filtro per prezzo basso (<= 99)), param: ', params.toString());
+          break;
+        case 'mediumPrice':
+          params = params.set('prezzo_gte', '100');
+          params = params.set('prezzo_lte', '150');
+          // console.log('Applicando filtro per prezzo medio (>= 100 e <= 150), param: ', params.toString());
+          break;
+        case 'highPrice':
+          params = params.set('prezzo_gte', '150');
+          // console.log('Applicando filtro per prezzo alto (> 150), param: ', params.toString());
+          break;
+        default:
+          console.warn(`Valore non riconosciuto: ${filter}`);
+          break;
+      }
+    });
+
+    return this.http.get<IProduct[]>(`${environment.base_url}?`, { params }).pipe(
+      catchError(error => {
+        console.error("Si è verificato un errore durante il recupero dei prodotti", error);
+        throw error;
+      })
     );
-}
+  }
 
-getProductsByPrice(selectedFilters: string[]): Observable<IProduct[]> {
-  let params = new HttpParams();
+  // filterByColor
+  // chiamata testata su Postman: "http://localhost:3000/prodotti?colori_disponibili_like=giallo"
+  getColors(): Observable<string[]> {
+    return this.http.get<IProduct[]>(`${environment.base_url}`)
+    .pipe(
+      mergeMap(products => {
+        const availableColors: string[] = products.reduce((acc, product) => {
+          return acc.concat((product as any).colori_disponibili);
+        }, []);
+        return of([...new Set(availableColors)]);
+      }),
+      tap(availableColors => {
+        console.log('Available colors:', availableColors);
+      }),
+      catchError(error => {
+        console.error('Error fetching available colors:', error);
+        return throwError(error);
+      })
+    );
+  }
 
-  selectedFilters.forEach(filter => {
-    console.log('Filtro selezionato: ', filter);
-    switch (filter) {
-      case 'lowPrice':
-        params = params.set('prezzo_lte', '99');
-        console.log('Applicando filtro per prezzo basso (<= 99)), param: ', params.toString());
-        break;
-      case 'mediumPrice':
-        params = params.set('prezzo_gte', '100');
-        params = params.set('prezzo_lte', '150');
-        console.log('Applicando filtro per prezzo medio (>= 100 e <= 150), param: ', params.toString());
-        break;
-      case 'highPrice':
-        params = params.set('prezzo_gte', '150');
-        console.log('Applicando filtro per prezzo alto (> 150), param: ', params.toString());
-        break;
-      default:
-        console.warn(`Valore non riconosciuto: ${filter}`);
-        break;
-    }
-  });
-
-  return this.http.get<IProduct[]>(`${environment.base_url}?`, { params }).pipe(
-    catchError(error => {
-      console.error("Si è verificato un errore durante il recupero dei prodotti", error);
-      throw error;
-    })
-  );
-}
-
+  // getProductsByColor(color: string): Observable<IProduct[]> {
+  //   return this.http.get<IProduct[]>(`${environment.base_url}?colori_disponibili_like=${color}`)
+  //    .pipe(
+  //       map(
+  //         (data) => {
+  //           // console.log("Dati ricevuti:", data);
+  //           return data;
+  //         }
+  //       ),
+  //       catchError(
+  //         (error) => {
+  //           console.error("Si è verificato un errore durante il recupero dei prodotti", error);
+  //           return throwError(error);
+  //         }
+  //       )
+  //     );
+  // }
 }
 
 
