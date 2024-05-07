@@ -4,14 +4,12 @@ import { HomeComponent } from './components/home/home.component';
 import { UnderConstructionComponent } from './components/under-construction/under-construction.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
-import { AsideComponent } from './components/aside/aside.component';
 import { ProductsPreviewComponent } from './components/products-preview/products-preview.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'construction', component: UnderConstructionComponent },
-  { path: 'aside', component: AsideComponent },
   { path: 'preview', component: ProductsPreviewComponent },
   { path: 'list', component: ProductsListComponent },
   { path: 'list/category/:category', component: ProductsListComponent },

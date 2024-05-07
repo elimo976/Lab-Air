@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { catchError, switchMap, tap, throwError } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 import { IProduct } from 'src/app/models/product';
 import { FiltersService } from 'src/app/services/filters.service';
 import { ProductService } from 'src/app/services/product.service';
 import { priceFilterState } from '../filters/filters.component';
+
+interface ProductFilters {
+  category?: string;
+  newArrival?: boolean;
+  bestSellerGte?: number;
+  bestSellerLte?: number;
+}
 
 @Component({
   selector: 'app-products-list',
@@ -13,154 +20,111 @@ import { priceFilterState } from '../filters/filters.component';
 })
 export class ProductsListComponent implements OnInit {
   products: IProduct[] = [];
+  isLoading: boolean = false;
   page = 0;
   pageSize = 20;
   query: string = '';
-  selectedCategory?: string;
-  isLoading: boolean = false;
-  newArrival: boolean = true;
-  bestSellerGte?: number;
-  bestSellerLte?: number;
-  priceFilterState: priceFilterState = { lowPrice: false, mediumPrice: false, highPrice: false }; // Aggiungi una proprietà per memorizzare lo stato dei filtri dei prezzi
-
+  filters: ProductFilters = {};
 
   constructor(
-    private ps: ProductService,
-    private fs: FiltersService,
+    private productService: ProductService,
+    private filtersService: FiltersService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     console.log('Inizializzazione della lista dei prodotti...');
-    this.fs.getQuery().subscribe(query => this.query = query);
-  
-    this.route.params
-      .pipe(
-        switchMap(params => {
-          this.selectedCategory = params['category'];
-          this.newArrival = params['newArrival'] === 'true';
-          this.loadProducts();
-          return this.route.queryParams;
-        })
-      )
-      .subscribe(params => {
-        this.bestSellerGte = +params['bestSellerGte'];
-        this.bestSellerLte = +params['bestSellerLte'];
-  
-        if (this.selectedCategory) {
-          this.loadProductsByCategory();
-        } else if (this.newArrival) {
-          this.loadProductsByNewArrival(this.newArrival);
-        } else if (this.bestSellerGte !== undefined && this.bestSellerLte !== undefined) {
-          this.loadBestSellerProducts(this.bestSellerGte, this.bestSellerLte);
-        } else {
-          this.loadAllProducts(); // Chiamata quando nessun filtro è applicato
+    this.filtersService.getQuery().subscribe(query => this.query = query);
+
+    this.route.params.pipe(
+      tap(params => {
+        this.filters.category = params['category'];
+        this.filters.newArrival = params['newArrival'] === 'true';
+        this.loadFilteredProducts();
+      }),
+      switchMap(() => this.route.queryParams)
+    ).subscribe(params => {
+      this.filters.bestSellerGte = +params['bestSellerGte'];
+      this.filters.bestSellerLte = +params['bestSellerLte'];
+      // this.loadFilteredProducts();  // se inserisco questa riga, non carica i prodotti non filtrati né applica il filtro per nome, MA funziona il filtro per best seller. Se this.loadFilteredProducts(); viene inserito in entrambe le porzioni di codice, succede la stessa cosa. 
+    });
+  }
+
+  loadFilteredProducts(): void {
+    this.isLoading = true;
+    if (this.filters.category) {
+      this.filtersService.getProductsByCategory(this.filters.category).subscribe({
+        next: (products: IProduct[]) => {
+          this.products = products;
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error("Si è verificato un errore durante il recupero dei prodotti", error);
+          this.isLoading = false;
         }
       });
-      // this.loadAllProducts(); --------> se questo metodo viene chiamato al di fuori dei controlli,
-      // allora è possibile visualizzare correttamente la lista dei prodotti filtrati,
-      // ma non è più possibile filtrare i prodotti
-  }
-
-  applyPriceFilter() {
-    console.log('Applicando il filtro dei prezzi...');
-    console.log('Stato dei filtri dei prezzi:', this.priceFilterState);
-    this.products = [...this.products]; // Copia l'array dei prodotti per mantenere l'originale inalterato
-    this.products = this.products.filter(product => {
-      if (this.priceFilterState.lowPrice && product.prezzo <= 99) {
-        return true;
-      }
-      if (this.priceFilterState.mediumPrice && product.prezzo >= 100 && product.prezzo <= 150) {
-        return true;
-      }
-      if (this.priceFilterState.highPrice && product.prezzo > 150) {
-        return true;
-      }
-      return false;
-    });
-    console.log('Lista dei prodotti filtrati:', this.products);
-  }
-
-  
-  loadProducts(){
-    this.isLoading = true;
-    this.fs.getProductsByPrice(this.priceFilterState.lowPrice, this.priceFilterState.mediumPrice, this.priceFilterState.highPrice).subscribe(products => {
-      this.products = products;
-      this.applyPriceFilter();
-      this.isLoading = false;
-    })
-  }
-
-  loadAllProducts() {
-    this.isLoading = true;
-    this.ps.getProducts()
-      .pipe(
-        tap({
-          next: (products: IProduct[]) => {
-            console.log('Prodotti caricati con successo:', products);
-            this.products = products;
-            this.isLoading = false;
-          },
-          error: (error) => {
-            console.error('Si è verificato un errore durante il recupero dei prodotti:', error);
-            this.isLoading = false;
-          }
-        })
-      )
-      .subscribe();
-  }
-
-  loadProductsByCategory(): void {
-    console.log('Loading products for category:', this.selectedCategory);
-    this.isLoading = true;
-    if (this.selectedCategory) {
-      this.fs.getProductsByCategory(this.selectedCategory)
-        .subscribe({
-          next: (products: IProduct[]) => {
-            this.products = products;
-            this.isLoading = false;
-          },
-          error: (error) => {
-            console.error("Si è verificato un errore durante il recupero dei prodotti", error);
-            this.isLoading = false;
-          }
-        });
+    } else if (this.filters.newArrival) {
+      this.filtersService.getProductsByNewArrival(this.filters.newArrival).subscribe({
+        next: (products: IProduct[]) => {
+          this.products = products;
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error("Si è verificato un errore durante il recupero dei prodotti", error);
+          this.isLoading = false;
+        }
+      });
+    } else if (this.filters.bestSellerGte !== undefined && this.filters.bestSellerLte !== undefined) {
+      this.filtersService.getProductsByBestSeller(this.filters.bestSellerGte, this.filters.bestSellerLte).subscribe({
+        next: (products: IProduct[]) => {
+          this.products = products;
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error("Si è verificato un errore durante il recupero dei prodotti", error);
+          this.isLoading = false;
+        }
+      });
     } else {
-      console.warn("La categoria selezionata non è definita.");
+      this.loadAllProducts();
     }
   }
 
-  loadProductsByNewArrival(newArrival: boolean) {
-    console.log('Loading new arrival products...');
+  loadAllProducts(): void {
     this.isLoading = true;
-    this.fs.getProductsByNewArrival(newArrival)
-      .subscribe({
+    this.productService.getProducts().pipe(
+      tap({
         next: (products: IProduct[]) => {
           this.products = products;
           this.isLoading = false;
         },
         error: (error) => {
-          console.error("Si è verificato un errore durante il recupero dei prodotti", error);
+          console.error('Si è verificato un errore durante il recupero dei prodotti:', error);
           this.isLoading = false;
         }
-      });
+      })
+    ).subscribe();
   }
 
-  loadBestSellerProducts(bestSellerGte: number, bestSellerLte: number): void {
-    // console.log('Loading best seller products...');
-    this.isLoading = true;
-    this.fs.getProductsByBestSeller(bestSellerGte, bestSellerLte)
-      .subscribe({
-        next: (products: IProduct[]) => {
-          this.products = products;
-          this.isLoading = false;
-          // console.log("Best seller products:", products);
-        },
-        error: (error) => {
-          console.error("Si è verificato un errore durante il recupero dei prodotti", error);
-          this.isLoading = false;
-        }
-      });
+applyPriceFilters(priceFilters: { lowPrice: boolean, mediumPrice: boolean, highPrice: boolean }): void {
+  const selectedFilters = [];
+  if (priceFilters.lowPrice) {
+    selectedFilters.push('lowPrice');
   }
+  if (priceFilters.mediumPrice) {
+    selectedFilters.push('mediumPrice');
+  }
+  if (priceFilters.highPrice) {
+    selectedFilters.push('highPrice');
+  }
+
+  this.filtersService.getProductsByPrice(selectedFilters)
+    .subscribe(products => {
+      this.products = products;
+    });
 }
+
+
+}
+
 

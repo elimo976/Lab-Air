@@ -1,3 +1,8 @@
+aside {
+    color: #2f2e2e;
+    text-align: start;
+}
+
 #accordion {
     font-size: 1rem;
 }
@@ -22,8 +27,11 @@
     font-size: 1rem;
 }
 
-
 @media screen and (max-width: 768px) {
+    h4 {
+        font-size: 1rem;
+    }
+
     #accordion {
         font-size: .9rem;
     }
@@ -33,5 +41,12 @@
     }
     #accordion button {
         font-size: .9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    aside {
+        display: none;
+        width: 0;
     }
 }

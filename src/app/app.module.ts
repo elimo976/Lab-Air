@@ -17,7 +17,6 @@ import { HistoryComponent } from './components/history/history.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
-import { AsideComponent } from './components/aside/aside.component';
 import { BestSellersComponent } from './components/best-sellers/best-sellers.component';
 import { ProductsPreviewComponent } from './components/products-preview/products-preview.component';
 import { SizesComponent } from './components/sizes/sizes.component';
@@ -41,7 +40,6 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     NavbarComponent,
     ProductDetailComponent,
     ProductsListComponent,
-    AsideComponent,
     BestSellersComponent,
     ProductsPreviewComponent,
     SizesComponent,

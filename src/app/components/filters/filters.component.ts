@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FiltersService } from 'src/app/services/filters.service';
 
-export interface priceFilterState { // VALUTA SE EXPORT RIMANE
+export interface priceFilterState {
   lowPrice: boolean;
   mediumPrice: boolean;
   highPrice: boolean;
@@ -47,7 +47,7 @@ export class FiltersComponent {
     this.priceFilterChange.emit({
       lowPrice: this.lowPrice,
       mediumPrice: this.mediumPrice,
-      highPrice: this.highPrice,
+      highPrice: this.highPrice
     })
   }
 }

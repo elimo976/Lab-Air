@@ -66,27 +66,37 @@ getProductsByBestSeller(best_seller_gte: number, best_seller_lte: number): Obser
     );
 }
 
-// filterByPrice
-// chiamata al server prezzo inferiore a 100€: "http://localhost:3000/prodotti?prezzo_lte=99"
-
-// chiamata al server prezzo tra 100€ e 150€: "http://localhost:3000/prodotti?prezzo_gte=100&prezzo_lte=150"
-
-// chiamata al server prezzo superiore a 150€: "http://localhost:3000/prodotti?prezzo_gte=150"
-
-getProductsByPrice(lowPrice: boolean, mediumPrice: boolean, highPrice: boolean): Observable<IProduct[]>{
+getProductsByPrice(selectedFilters: string[]): Observable<IProduct[]> {
   let params = new HttpParams();
 
-  if(lowPrice){
-    params = params.set('prezzo_lte', '99');
-  }
-  if(mediumPrice){
-    params = params.set('prezzo_gte', '100');
-    params = params.set('prezzo_lte', '150');
-  }
-  if(highPrice){
-    params = params.set('prezzo_gte', '150');
-  }
-  return this.http.get<IProduct[]>(`${environment.base_url}?`, {params})
+  selectedFilters.forEach(filter => {
+    console.log('Filtro selezionato: ', filter);
+    switch (filter) {
+      case 'lowPrice':
+        params = params.set('prezzo_lte', '99');
+        console.log('Applicando filtro per prezzo basso (<= 99)), param: ', params.toString());
+        break;
+      case 'mediumPrice':
+        params = params.set('prezzo_gte', '100');
+        params = params.set('prezzo_lte', '150');
+        console.log('Applicando filtro per prezzo medio (>= 100 e <= 150), param: ', params.toString());
+        break;
+      case 'highPrice':
+        params = params.set('prezzo_gte', '150');
+        console.log('Applicando filtro per prezzo alto (> 150), param: ', params.toString());
+        break;
+      default:
+        console.warn(`Valore non riconosciuto: ${filter}`);
+        break;
+    }
+  });
+
+  return this.http.get<IProduct[]>(`${environment.base_url}?`, { params }).pipe(
+    catchError(error => {
+      console.error("Si è verificato un errore durante il recupero dei prodotti", error);
+      throw error;
+    })
+  );
 }
 
 }

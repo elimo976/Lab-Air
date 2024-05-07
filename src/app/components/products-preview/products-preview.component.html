@@ -4,8 +4,8 @@
             <img [src]="product.immagine" class="card-img-top">
 
             <div class="card-body">
-                <p>{{product.best_seller}}</p>
-                <h5 class="card-title">{{product.nome}}</h5>
+                <app-best-sellers [bestSeller]="product"></app-best-sellers>
+                <h5 class="card-title mt-2">{{product.nome}}</h5>
                 <p class="card-text">{{product.categoria}}</p>
                 <p class="card-text">{{product.prezzo | localCurrency: "EUR"}}</p>
             </div>
