@@ -48,12 +48,13 @@
         </h2>
         <div ngbAccordionCollapse>
             <div ngbAccordionBody>
-                <div id="colors" *ngIf="colors">
-                    <div *ngFor="let color of colors">
-                        <app-color-label [color]="color"></app-color-label>
+                <ng-template>
+                    <div id="colors" class="d-flex flex-wrap justify-content-between" *ngIf="colors">
+                        <div *ngFor="let color of colors">
+                            <app-color-label [color]="color"></app-color-label>
+                        </div>
                     </div>
-                </div>
-                
+                </ng-template>
             </div>
         </div>
     </div>

@@ -28,15 +28,20 @@ export class ProductsListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private filtersService: FiltersService,
+    private fs: FiltersService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     console.log('Inizializzazione della lista dei prodotti...');
-    this.filtersService.getQuery().subscribe(query => this.query = query);
+    this.fs.getQuery().subscribe(query => {
+      this.query = query;
+      console.log('Query:', this.query);
+    });
+    
 
-    this.route.params.pipe(
+    this.route.params
+    .pipe(
       tap(params => {
         this.filters.category = params['category'];
         this.filters.newArrival = params['newArrival'] === 'true';
@@ -47,13 +52,13 @@ export class ProductsListComponent implements OnInit {
       this.filters.bestSellerGte = +params['bestSellerGte'];
       this.filters.bestSellerLte = +params['bestSellerLte'];
       // this.loadFilteredProducts();  // se inserisco questa riga, non carica i prodotti non filtrati né applica il filtro per nome, MA funziona il filtro per best seller. Se this.loadFilteredProducts(); viene inserito in entrambe le porzioni di codice, succede la stessa cosa. 
-    });
+    })
   }
 
   loadFilteredProducts(): void {
     this.isLoading = true;
     if (this.filters.category) {
-      this.filtersService.getProductsByCategory(this.filters.category).subscribe({
+      this.fs.getProductsByCategory(this.filters.category).subscribe({
         next: (products: IProduct[]) => {
           this.products = products;
           this.isLoading = false;
@@ -64,7 +69,7 @@ export class ProductsListComponent implements OnInit {
         }
       });
     } else if (this.filters.newArrival) {
-      this.filtersService.getProductsByNewArrival(this.filters.newArrival).subscribe({
+      this.fs.getProductsByNewArrival(this.filters.newArrival).subscribe({
         next: (products: IProduct[]) => {
           this.products = products;
           this.isLoading = false;
@@ -75,7 +80,7 @@ export class ProductsListComponent implements OnInit {
         }
       });
     } else if (this.filters.bestSellerGte !== undefined && this.filters.bestSellerLte !== undefined) {
-      this.filtersService.getProductsByBestSeller(this.filters.bestSellerGte, this.filters.bestSellerLte).subscribe({
+      this.fs.getProductsByBestSeller(this.filters.bestSellerGte, this.filters.bestSellerLte).subscribe({
         next: (products: IProduct[]) => {
           this.products = products;
           this.isLoading = false;
@@ -91,6 +96,9 @@ export class ProductsListComponent implements OnInit {
   }
 
   loadAllProducts(): void {
+    if (this.fs.getQuery()) {
+      this.fs.setQuery('');
+    }
     this.isLoading = true;
     this.productService.getProducts().pipe(
       tap({
@@ -118,7 +126,7 @@ applyPriceFilters(priceFilters: { lowPrice: boolean, mediumPrice: boolean, highP
     selectedFilters.push('highPrice');
   }
 
-  this.filtersService.getProductsByPrice(selectedFilters)
+  this.fs.getProductsByPrice(selectedFilters)
     .subscribe(products => {
       this.products = products;
     });
