@@ -19,7 +19,6 @@ export class FiltersComponent {
   lowPrice: boolean = false;
   mediumPrice: boolean = false;
   highPrice: boolean = false;
-  // filteredProducts: IProduct[] = [];
   colors: { name: string, code: string }[] = [];
   products: IProduct[] = [];
 

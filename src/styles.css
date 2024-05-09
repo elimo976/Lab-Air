@@ -74,6 +74,8 @@ body {
     justify-content: flex-end;
     align-items: center;
     height: 2.4em;
+    padding-right: 1em;
+
 }
 
 .navbar-menu {
@@ -99,6 +101,7 @@ body {
     align-items: center;
     justify-content: space-between;
     height: 5em;
+    padding-right: 1.5em;
 }
 
 .logo {

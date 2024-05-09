@@ -47,7 +47,7 @@
             </div>
         </div>
         <div id="fasciaDown" class="clearfix">
-            <button id="addToCart" (click)="closePopup()">Visualizza carrello ({{ countSelectedSizes() }})</button>
+            <button id="addToCart" (click)="closePopup()" routerLink="/cart">Visualizza carrello ({{ countSelectedSizes() }})</button>
             <button id="goToPay" (click)="closePopup()">Pagamento</button>
         </div>
     </section>

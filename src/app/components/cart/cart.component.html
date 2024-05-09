@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="wrap m-4">
+    <div id="cart-view" class="d-flex gap-4">
+        <div id="cart-left-container">
+            <div id="cart-container" class="mb-3">
+                <h5>Spedizione gratuita per i Member.</h5>
+                <p>Diventa Member LabAir e approfitta della spedizione rapida e gratuita. <a href="#">Unisciti a noi</a> o <a href="#">Accedi</a></p>
+            </div>
+            <div id="cart-items" class="p-1">
+                <h4>Carrello</h4>
+            </div>
+        </div>
+        <div id="cart-right-summary">
+            <h4>Riepilogo</h4>
+        </div>
+    </div>
+    <app-slider [title]="'Potrebbe piacerti anche'" [items]="LikelyFaves"></app-slider>
+</div>
+<app-footer></app-footer>

@@ -27,6 +27,7 @@ import { FiltersComponent } from './components/filters/filters.component';
 import { FilterByNamePipe } from './Pipes/filter-by-name.pipe';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ColorLabelComponent } from './components/color-label/color-label.component';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ColorLabelComponent } from './components/color-label/color-label.compon
     FilterByNamePipe,
     SpinnerComponent,
     ColorLabelComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

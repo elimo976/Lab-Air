@@ -5,6 +5,7 @@ import { UnderConstructionComponent } from './components/under-construction/unde
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { ProductsPreviewComponent } from './components/products-preview/products-preview.component';
+import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'list/new-arrival/:newArrival', component: ProductsListComponent },
   { path: 'list/:bestSellerGte/:bestSellerLte', component: ProductsListComponent },  
   { path: 'product/:id', component: ProductDetailComponent },
+  { path: 'cart', component: CartComponent}
 
 ];
 

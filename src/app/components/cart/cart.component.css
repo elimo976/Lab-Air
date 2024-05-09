@@ -1,0 +1,40 @@
+#cart-view {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#cart-left-container{
+width: 60%;
+}
+
+#cart-container {
+border: 1px solid #d3d3d3;
+padding: 20px 20px 10px 20px;
+}
+
+#cart-container h5{
+    color: #e16e03;
+}
+
+#cart-container p {
+    font-size: 1rem;
+    color: #747474;
+}
+
+#cart-container a {
+    color: #747474;
+    font-weight: bold;
+}
+
+#cart-container a:hover {
+    color: #595959;
+    font-weight: bold;
+}
+
+#cart-items {
+    width: 35%;
+}
+
+#cart-right-summary {
+    width: 35%;
+}

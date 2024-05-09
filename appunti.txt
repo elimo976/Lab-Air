@@ -50,100 +50,23 @@ home
 
        freestyle bike: "https://images.pexels.com/photos/71104/utah-mountain-biking-bike-biking-71104.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 
-       PRODUCT-DETAIL.TS:
+cart
 
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IProduct } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+    potrebbe piacerti anche:
 
-@Component({
-  selector: 'app-product-detail',
-  templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
-})
-export class ProductDetailComponent implements OnInit {
-  @Input() product?: IProduct;
+        kettlebells: "https://images.pexels.com/photos/221247/pexels-photo-221247.jpeg"
 
-  currentImage?: string;
-  currentVideo?: string;
-  activeThumbnail?: string | null;
+        Baseball: 'https://images.pexels.com/photos/257970/pexels-photo-257970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
 
-  constructor(private ps: ProductService, private route: ActivatedRoute) { }
+        Skip Rope: 'https://images.pexels.com/photos/45056/pexels-photo-45056.jpeg'
+        
+        Fit ball: 'https://images.pexels.com/photos/3768593/pexels-photo-3768593.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.ps.getProductById(params['id']).subscribe(product => {
-        this.product = product;
-        if (this.product) {
-          this.currentImage = this.product.immagine;
-        }
-      });
-    });
-  }
+        Dumbbells: 'https://images.pexels.com/photos/4397833/pexels-photo-4397833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+        
+        Boxing Gloves': 'https://images.pexels.com/photos/6798724/pexels-photo-6798724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
 
-  isVideo(thumb: string): boolean {
-    return thumb.includes('mp4') || thumb.includes('mov');
-  }
+        'Resistance bands': 'https://images.pexels.com/photos/863977/pexels-photo-863977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
 
-  changeImage(src: string): void {
-    if (this.isVideo(src)) {
-      this.currentVideo = src;
-      this.currentImage = "";
-    } else {
-      this.currentImage = src;
-      this.currentVideo = "";
-    }
-  }
-
-}
-
-PRODUCT-DETAIL.HTML:
-
-<app-header></app-header>
-<div id="containerDetail" *ngIf="product">
-
-    <div class="detailSx" *ngIf="product.thumbnails">
-        <section id="thumbanils">
-            <div *ngFor="let thumb of product.thumbnails | keyvalue" (mouseover)="activeThumbnail = thumb.value">
-                <ng-container *ngIf="!isVideo(thumb.value)">
-                    <img [src]="thumb.value" alt="thumbnail" (click)="changeImage(thumb.value)">
-                </ng-container>
-                <ng-container *ngIf="isVideo(thumb.value)">
-                    <video [src]="thumb.value" controls (click)="changeImage(thumb.value)"></video>
-                </ng-container>
-            </div>
-        </section>
-    </div>
-    <div class="detailCenter">
-        <div class="position-relative" *ngIf="product.thumbnails">
-            <ngb-carousel *ngIf="product.thumbnails" [interval]="0" [wrap]="true">
-                <ng-container *ngFor="let t of product.thumbnails | keyvalue">
-                    <ng-template ngbSlide *ngIf="!isVideo(t.value)">
-                        <img class="img-fluid" [src]="activeThumbnail || t.value" alt="">
-                    </ng-template>
-                    <ng-template ngbSlide *ngIf="isVideo(t.value)">
-                        <video [src]="t.value" controls></video>
-                    </ng-template>
-                </ng-container>
-            </ngb-carousel>
-        </div>
-        <div id="bestSeller" *ngIf="product.best_seller >=4">
-            <i class="bi-star-fill me-2"></i>
-            <span>Valutazione alta</span>
-        </div>
-    </div>
-
-    <div class="detailDx">
-        <h3>{{product.nome}}</h3>
-        <h5>{{product.categoria}}</h5>
-        <p><strong>{{product.prezzo| localCurrency: "EUR"}}</strong></p>
-        <p>{{product.descrizione}}</p>
-        <app-sizes></app-sizes>
-        <p>Colori disponibili: {{product.colori_disponibili | spaceAfterComma}}</p>
-        <app-best-sellers [bestSeller]="product"></app-best-sellers>
-    </div>
-</div>
-<app-footer></app-footer>
 
 
