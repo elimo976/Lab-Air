@@ -45,7 +45,7 @@ export class HeaderComponent {
       .pipe(
         tap({
           next: (products: IProduct[]) => {
-            console.log('Prodotti caricati con successo:', products);
+            // console.log('Prodotti caricati con successo:', products);
             this.products = products;
             this.isLoading = false;
           },

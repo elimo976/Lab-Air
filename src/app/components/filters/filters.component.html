@@ -51,7 +51,7 @@
                 <ng-template>
                     <div id="colors" class="d-flex flex-wrap justify-content-between" *ngIf="colors">
                         <div *ngFor="let color of colors">
-                            <app-color-label [color]="color"></app-color-label>
+                            <app-color-label [color]="color" (colorSelected)="updateProductListByColor($event)"></app-color-label>
                         </div>
                     </div>
                 </ng-template>

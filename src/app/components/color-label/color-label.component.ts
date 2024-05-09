@@ -7,10 +7,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ColorLabelComponent {
   @Input() color: { name: string, code: string } = { name: '', code: '' };
-
   @Output() colorSelected = new EventEmitter<string>();
 
-  selectColor(colorName: string) {
-    this.colorSelected.emit(colorName);
-  }
+  showBackgroundColor(event: MouseEvent) {
+     const backgroundColor = (event.currentTarget as HTMLDivElement).style.background; console.log('Colore di sfondo:', backgroundColor); this.colorSelected.emit(this.color.name);
+     }
 }

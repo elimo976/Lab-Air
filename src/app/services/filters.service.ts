@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, map, mergeMap, of, pipe, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, map, mergeMap, of, pipe, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { IProduct, ProductDTO } from '../models/product';
 import { ProductService } from './product.service';
@@ -10,6 +10,7 @@ import { ProductService } from './product.service';
 })
 export class FiltersService {
   private querySource = new BehaviorSubject<string>('');
+  colorSelected: Subject<string> = new Subject<string>();
 
   constructor(private http: HttpClient, private ps: ProductService) { }
 
@@ -61,7 +62,9 @@ export class FiltersService {
         catchError(
           (error) => {
             console.error("Si è verificato un errore durante il recupero dei prodotti", error);
-            return throwError(error);
+            return throwError(()=> {
+              error.message = 'Si è verificato un errore durante il recupero dei prodotti';
+          });
           }
         )
       );
@@ -102,7 +105,6 @@ export class FiltersService {
   }
 
   // filterByColor
-  // chiamata testata su Postman: "http://localhost:3000/prodotti?colori_disponibili_like=giallo"
   getColors(): Observable<string[]> {
     return this.http.get<IProduct[]>(`${environment.base_url}`)
     .pipe(
@@ -113,32 +115,48 @@ export class FiltersService {
         return of([...new Set(availableColors)]);
       }),
       tap(availableColors => {
-        console.log('Available colors:', availableColors);
+        // console.log('Available colors:', availableColors);
       }),
       catchError(error => {
         console.error('Error fetching available colors:', error);
-        return throwError(error);
+        return throwError(()=>{
+          error.message = 'Errore durante il recupero dei colori disponibili: ', error.message;
+        });
       })
     );
   }
 
-  // getProductsByColor(color: string): Observable<IProduct[]> {
-  //   return this.http.get<IProduct[]>(`${environment.base_url}?colori_disponibili_like=${color}`)
-  //    .pipe(
-  //       map(
-  //         (data) => {
-  //           // console.log("Dati ricevuti:", data);
-  //           return data;
-  //         }
-  //       ),
-  //       catchError(
-  //         (error) => {
-  //           console.error("Si è verificato un errore durante il recupero dei prodotti", error);
-  //           return throwError(error);
-  //         }
-  //       )
-  //     );
-  // }
+    // Metodo per sottoscriversi all'evento di selezione del colore
+    onColorSelected(): Observable<string> {
+      return this.colorSelected.asObservable();
+    }
+  
+    // Metodo per emettere il colore selezionato
+    emitColorSelected(color: string): void {
+      this.colorSelected.next(color);
+    }
+
+  getProductsByColor(color: string): Observable<IProduct[]> {
+    console.log('Chiamata HTTP per ottenere prodotti con colore:', color);
+    return this.http.get<IProduct[]>(`${environment.base_url}?colori_disponibili_like=${color}`)
+     .pipe(
+        map(
+          (data) => {
+            console.log("Dati ricevuti:", data);
+            return data;
+          }
+        ),
+        catchError(
+          (error) => {
+            console.error("Si è verificato un errore durante il recupero dei prodotti", error);
+            return throwError(()=>{
+              error.message = "Errore durante il recupero dei prodotti"
+            });
+          }
+        )
+      );
+  }
+
 }
 
 

@@ -3,7 +3,7 @@
     <div class="row m-0">
         <!-- Aside -->
         <div class="col-lg-3 p-3 containerAside">
-            <app-filters (priceFilterChange)="applyPriceFilters($event)"></app-filters>
+            <app-filters (priceFilterChange)="applyPriceFilters($event)" (colorSelected)="colorSelected($event)"></app-filters>
             <button id="reset" class="btn btn-outline-warning ms-3 mt-5 p-2" (click)="loadAllProducts()">Resetta
                 filtri</button>
         </div>

@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
 import { IProduct } from 'src/app/models/product';
 import { FiltersService } from 'src/app/services/filters.service';
 import { ProductService } from 'src/app/services/product.service';
-import { priceFilterState } from '../filters/filters.component';
 
 interface ProductFilters {
   category?: string;
@@ -25,6 +24,7 @@ export class ProductsListComponent implements OnInit {
   pageSize = 20;
   query: string = '';
   filters: ProductFilters = {};
+  filteredProducts: IProduct[] = [];
 
   constructor(
     private productService: ProductService,
@@ -36,9 +36,8 @@ export class ProductsListComponent implements OnInit {
     console.log('Inizializzazione della lista dei prodotti...');
     this.fs.getQuery().subscribe(query => {
       this.query = query;
-      console.log('Query:', this.query);
+
     });
-    
 
     this.route.params
     .pipe(
@@ -132,6 +131,31 @@ applyPriceFilters(priceFilters: { lowPrice: boolean, mediumPrice: boolean, highP
     });
 }
 
+@Output()
+colorFilterChange = new EventEmitter<string>();
+
+colorSelected(color: string): void {
+  this.updateProductListByColor(color);
+}
+
+updateProductListByColor(color: string): void {
+  console.log('Color selected:', color);
+  if (color) {
+    this.isLoading = true;
+    this.fs.getProductsByColor(color).subscribe({
+      next: (products: IProduct[]) => {
+        this.products = products;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error("Si è verificato un errore durante il recupero dei prodotti", error);
+        this.isLoading = false;
+      }
+    });
+  } else {
+    this.products = this.filteredProducts;
+  }
+}
 
 }
 

@@ -1,5 +1,2 @@
-    <div class="color-label" (click)="selectColor(color.name)" [style.background]="color.code">
+    <div class="color-label" [style.background]="color.code" (click)="showBackgroundColor($event); $event.stopPropagation()">
     </div>
-
-
-

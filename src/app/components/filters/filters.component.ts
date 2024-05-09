@@ -26,13 +26,16 @@ export class FiltersComponent {
   @Output()
   priceFilterChange = new EventEmitter<priceFilterState>();
 
+  @Output()
+  colorSelected = new EventEmitter<string>();
+
   constructor(
     private fs: FiltersService,
   ) { }
 
   ngOnInit(): void {
     this.getColors();
-    console.log('Colors in ngOnInit: ', this.colors);
+    // console.log('Colors in ngOnInit: ', this.colors);
   }
 
   getCategorie() {
@@ -110,14 +113,8 @@ export class FiltersComponent {
     return colorMappings[colorName] || '#000000';
   }
 
-  filterPrductsByColor(color: string) {
-    // if (color) {
-    //   this.filteredProducts = this.products.filter(product => {
-    //     return product.colori_disponibili.includes(color);
-    //   });
-    // } else {
-    //   this.filteredProducts = this.products;
-    // }
+  updateProductListByColor(color: string): void {
+    this.colorSelected.emit(color);
   }
 
 }
