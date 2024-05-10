@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { IProduct } from 'src/app/models/product';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -6,6 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
+
+  products: IProduct[] = [];
+
+  constructor(private cs: CartService) { }
+
+  ngOnInit() {
+    this.cs.getCartItems()
+    .subscribe(cartItems => {
+       this.products = cartItems;
+ 
+    })
+  }
+
   LikelyFaves = [
     { title: 'Kettlebells', imageUrl: 'https://images.pexels.com/photos/221247/pexels-photo-221247.jpeg' },
     { title: 'Baseball', imageUrl: 'https://images.pexels.com/photos/257970/pexels-photo-257970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' },

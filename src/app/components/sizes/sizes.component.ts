@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IProduct } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { CartModalComponent } from '../cart-modal/cart-modal.component';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-sizes',
@@ -38,7 +39,8 @@ export class SizesComponent {
   constructor(
     private ps: ProductService,
     private route: ActivatedRoute,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private cs: CartService,
   ) { }
 
 
@@ -72,6 +74,11 @@ export class SizesComponent {
     setTimeout(() => {
       this.closePopup();
     }, 10000);
+
+    this.ps.getProductById(this.selectedSize.id)
+    .subscribe((product: IProduct) => {
+      this.cs.addToCart(product);
+    })
 
   }
 
