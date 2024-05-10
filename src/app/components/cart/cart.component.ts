@@ -17,7 +17,6 @@ export class CartComponent {
     this.cs.getCartItems()
     .subscribe(cartItems => {
        this.products = cartItems;
- 
     })
   }
 
@@ -31,4 +30,9 @@ export class CartComponent {
     { title: 'Resistance Bands', imageUrl: 'https://images.pexels.com/photos/863977/pexels-photo-863977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'},
     { title: 'Tennis Racket', imageUrl: 'https://images.pexels.com/photos/1432039/pexels-photo-1432039.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' },
   ];
+
+  removeFromCart(index: number) {
+    this.cs.removeFromCart(index);
+    this.products.splice(index, 1);
+  }
 }

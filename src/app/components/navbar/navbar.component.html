@@ -268,11 +268,25 @@
         </ul>
     </nav>
     <div class="right-side">
-        <input class="searchbar" type="text" [(ngModel)]="query" (keyup.enter)="onChange()" placeholder="Cerca per nome">
-        <div class="icon-container">
-            <div class="icon"><a href="preferiti"><img src="../../../assets/icons/wishlist.png" alt=""></a></div>
-            <div class="icon"><a routerLink="/cart"><img src="../../../assets/icons/carrello.png" alt="carrello"></a></div>
-            <div class="icon"><a href=""><img src="../../../assets/icons/account.png" alt="account"></a></div>
+        <div class="input-group">
+            <input class="form-control search-input" type="text" [(ngModel)]="query" (keyup.enter)="onChange()" placeholder="Cerca per nome">
+        </div>
+        <div class="icon-container d-flex">
+            <a href="#" title="accedi">
+                <div class="login">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+            </a>
+            <a href="#" title="preferiti">
+                <div class="wish">
+                    <i class="bi bi-heart"></i>
+                </div>
+            </a>
+            <a routerLink="/cart" title="carrello">
+                <div class="cart">
+                    <i class="bi bi-cart"></i>
+                </div>
+            </a>
         </div>
     </div>
     <div class="hamburger-icon">

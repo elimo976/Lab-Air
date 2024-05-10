@@ -13,7 +13,7 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class SizesComponent {
   sizesShoes = [
-    { id: 1, num: 'EU 36', prezzo: 149.99 },
+    { id: 1, num: 'EU 36' },
     { id: 2, num: 'EU 37' },
     { id: 3, num: 'EU 38' },
     { id: 4, num: 'EU 39' },

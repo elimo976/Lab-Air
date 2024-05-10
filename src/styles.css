@@ -230,16 +230,21 @@ li.submenu-item a:hover {
     gap: 10px;
 }
 
-.searchbar {
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    padding: 5px 10px;
-}
+.search-input {
+    background-image: url('./assets/icons/lente.png');
+    background-repeat: no-repeat;
+    background-position: 95% center;
+    background-size: 25px;
+  }
 
 .icon-container {
     margin-left: 10px;
     display: flex;
     gap: 10px;
+}
+
+.icon-container a {
+    color: #696969;
 }
 
 .icon {

@@ -9,12 +9,19 @@
         </div>
         <!-- Componente con le cards -->
         <div class="row g-4 my-4 pe-3 containerCards">
-            <ng-container *ngIf="products && products.length > 0">
+            <ng-container *ngIf="query && products && products.length > 0">
                 <ng-container *ngFor="let p of products | filterByName: query | keyvalue | slice: pageSize * page : pageSize * (page + 1)">
                   <ng-container>
                     <app-products-preview class="cards" [product]="p.value"></app-products-preview>
                   </ng-container>
                 </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!query && products && products.length > 0">
+                <ng-container *ngFor="let p of products | slice: pageSize * page : pageSize * (page + 1)">
+                    <ng-container>
+                      <app-products-preview class="cards" [product]="p"></app-products-preview>
+                    </ng-container>
+                  </ng-container>
               </ng-container>
             <ng-template #noResults>
                 <p *ngIf="products && products.length ===0 && isLoading" class="noResult">Nessun articolo corrispondente

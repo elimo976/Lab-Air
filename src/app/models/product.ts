@@ -9,8 +9,12 @@ export interface IProduct {
     immagine: string;
     nuovi_arrivi: boolean;
     best_seller: number,
-    thumbnails: IThumbnails
+    thumbnails: IThumbnails,
 }
+
+export interface IProductWithSize extends Omit<IProduct, 'selectedSize'> {
+    selectedSize: { sizeId: number; num: string };
+  }
 
 export interface IThumbnails {
     thumb: string,
