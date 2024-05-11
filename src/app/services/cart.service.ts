@@ -8,12 +8,18 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
   private cartItems: IProduct[] = [];
   private cartSubject = new BehaviorSubject<IProduct[]>([]);
-  selectedSize: { id: number; num: string } | null = null;
+  private localStorageKey = 'selectedSize';
+  selectedSize: { id: number; num: string }[] = [];
+
   constructor() {
     const savedCartItems = localStorage.getItem('cartItems');
     if (savedCartItems) {
       this.cartItems = JSON.parse(savedCartItems);
       this.cartSubject.next(this.cartItems);
+    }
+    const savedSelectedSize = localStorage.getItem(this.localStorageKey);
+    if (savedSelectedSize) {
+      this.selectedSize = JSON.parse(savedSelectedSize);
     }
    }
 
@@ -37,5 +43,32 @@ export class CartService {
 
   getCartItems() {
     return this.cartSubject.asObservable();
+  }
+
+  // setSelectedSize(size: { id: number; num: string }) {
+  //   const isSizeExist = this.selectedSize.some(s => s.id === size.id);
+  //   if(!isSizeExist) {
+  //     this.selectedSize.push(size);
+  //     localStorage.setItem(this.localStorageKey, JSON.stringify(this.selectedSize));
+  //   }
+  // }
+
+  getSelectedSize(): { id: number; num: string }[] {
+    return JSON.parse(localStorage.getItem(this.localStorageKey) || '[]') as { id: number; num: string }[];
+  }
+  
+
+  setSelectedSize(size: { id: number; num: string }) {
+    const selectedSizes = JSON.parse(localStorage.getItem(this.localStorageKey) || '[]') as { id: number; num: string }[];
+    selectedSizes.push(size);
+    localStorage.setItem(this.localStorageKey, JSON.stringify(selectedSizes));
+  }
+  
+  
+
+  removeSelectedSize(index: number) {
+    localStorage.removeItem(this.localStorageKey);
+    this.selectedSize.splice(index, 1);
+    localStorage.setItem(this.localStorageKey, JSON.stringify(this.selectedSize));
   }
 }

@@ -10,6 +10,7 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartComponent {
 
   products: IProduct[] = [];
+  
 
   constructor(private cs: CartService) { }
 
@@ -18,6 +19,9 @@ export class CartComponent {
     .subscribe(cartItems => {
        this.products = cartItems;
     })
+
+    this.selectedSize = this.cs.selectedSize;
+    console.log('Valore di selectedSize nel CartComponent:', this.selectedSize);
   }
 
   removeFromCart(index: number) {
@@ -28,6 +32,33 @@ export class CartComponent {
   get selectedSize() {
     return this.cs.selectedSize;
   }
+
+  set selectedSize(value: any) {
+    this.cs.selectedSize = value;
+  }
+
+  removeSelectedSize(index: number) {
+    this.cs.removeSelectedSize(index);
+    this.products.splice(index, 1);
+  }
+
+  removeFromCartAndSelectedSize(index: number) {
+    this.removeFromCart(index);
+    this.removeSelectedSize(index);
+  }
+
+  changeSelectedSize(event: any, index: number) {
+  const sizeValue = event.target.value;
+  if (sizeValue) {
+    const selectedSize = { id: parseInt(sizeValue), num: sizeValue };
+    this.cs.setSelectedSize(selectedSize);
+    this.selectedSize[index] = selectedSize;
+  } else {
+    console.error("Valore della taglia non valido.");
+  }
+}
+
+
 
   LikelyFaves = [
     { title: 'Kettlebells', imageUrl: 'https://images.pexels.com/photos/221247/pexels-photo-221247.jpeg' },

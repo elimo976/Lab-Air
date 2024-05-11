@@ -48,7 +48,7 @@ export class SizesComponent {
   selectSize(size: { id: number; num: string }) {
     // console.log('Taglia seleziona:', size);
     this.selectedSize = size;
-    this.cs.selectedSize = size;
+    this.cs.setSelectedSize(size);
     this.errorMessage = "";
   }
 

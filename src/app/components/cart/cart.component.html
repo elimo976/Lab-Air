@@ -23,25 +23,26 @@
                                 <div class="flex-grow-1">
                                     <h5>{{ p.nome }}</h5>
                                     <p class="text-muted">{{ p.categoria }}</p>
-                                    <div>
-                                        <p>Taglia: {{ selectedSize?.num }}</p>
+                                    <div *ngIf="selectedSize && selectedSize[i]">
+                                        <p>Taglia: {{ selectedSize[i].num }}</p>
                                       </div>
                                     <div class="select-group d-flex">
-                                        <select class="form-select me-3" aria-label="Default select example">
+                                        <select class="form-select me-3" aria-label="Default select example"
+                                        (change)="changeSelectedSize($event, i)">
                                             <option selected>Cambia taglia</option>
-                                            <option value="1">EU 36</option>
-                                            <option value="2">EU 37</option>
-                                            <option value="3">EU 38</option>
-                                            <option value="4">EU 39</option>
-                                            <option value="5">EU 40</option>
-                                            <option value="6">EU 41</option>
-                                            <option value="7">EU 42</option>
-                                            <option value="8">EU 43</option>
-                                            <option value="9">EU 44</option>
-                                            <option value="10">EU 45</option>
-                                            <option value="11">EU 46</option>
-                                            <option value="12">EU 47</option>
-                                            <option value="13">EU 48</option>
+                                            <option value="EU 36">EU 36</option>
+                                            <option value="EU37">EU 37</option>
+                                            <option value="EU 38">EU 38</option>
+                                            <option value="EU 39">EU 39</option>
+                                            <option value="EU 40">EU 40</option>
+                                            <option value="EU 41">EU 41</option>
+                                            <option value="EU 42">EU 42</option>
+                                            <option value="EU 43">EU 43</option>
+                                            <option value="EU 44">EU 44</option>
+                                            <option value="EU 45">EU 45</option>
+                                            <option value="EU 46">EU 46</option>
+                                            <option value="EU 47">EU 47</option>
+                                            <option value="EU 48">EU 48</option>
                                           </select>
                                           <select class="form-select" aria-label="Default select example">
                                             <option>Quantità</option>
@@ -62,7 +63,7 @@
                                             </div>
                                         </a>
                                         <a routerLink="/cart" title="elimina">
-                                            <div class="delete" (click)="removeFromCart(i)">
+                                            <div class="delete" (click)="removeFromCartAndSelectedSize(i)">
                                                 <i class="bi bi-trash3"></i>
                                             </div>
                                         </a>
@@ -73,9 +74,9 @@
                                 </div>
                             </div>
                         </div>
+                        <hr>
                     </ng-container>
                 </div>
-                <hr>
             </div>
         </div>
         <div id="cart-right-summary">
