@@ -270,6 +270,13 @@ li.submenu-item a:hover {
     display: none;
 }
 
+.noResult {
+    grid-column: 1 / 4;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
 @media screen and (max-width: 768px) {
     .header-container {

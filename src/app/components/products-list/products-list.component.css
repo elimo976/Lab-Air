@@ -14,14 +14,6 @@
 #reset:hover {
     color: #3c3c3c;
 }
-
-  .noResult {
-    grid-column: 1 / 4;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   
   app-spinner {
     grid-column: 1 / 4;

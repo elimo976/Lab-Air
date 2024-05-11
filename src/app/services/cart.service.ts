@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
   private cartItems: IProduct[] = [];
   private cartSubject = new BehaviorSubject<IProduct[]>([]);
-
+  selectedSize: { id: number; num: string } | null = null;
   constructor() {
     const savedCartItems = localStorage.getItem('cartItems');
     if (savedCartItems) {

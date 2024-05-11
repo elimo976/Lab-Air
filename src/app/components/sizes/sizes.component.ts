@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { IProduct } from 'src/app/models/product';
@@ -45,9 +45,10 @@ export class SizesComponent {
   ) { }
 
 
-  selectSize(size: any) {
-    console.log('Taglia seleziona:', size);
+  selectSize(size: { id: number; num: string }) {
+    // console.log('Taglia seleziona:', size);
     this.selectedSize = size;
+    this.cs.selectedSize = size;
     this.errorMessage = "";
   }
 
@@ -106,8 +107,6 @@ export class SizesComponent {
       }
     });
   }
-  
-  
 
   openCartLimitModal() {
     const modalRef = this.modalService.open(CartModalComponent);

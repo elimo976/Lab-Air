@@ -10,22 +10,23 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartComponent {
 
   products: IProduct[] = [];
-  isLoading: boolean = false;
 
   constructor(private cs: CartService) { }
 
   ngOnInit() {
-    this.isLoading = true;
     this.cs.getCartItems()
     .subscribe(cartItems => {
        this.products = cartItems;
-       this.isLoading = false;
     })
   }
 
   removeFromCart(index: number) {
     this.cs.removeFromCart(index);
     this.products.splice(index, 1);
+  }
+
+  get selectedSize() {
+    return this.cs.selectedSize;
   }
 
   LikelyFaves = [

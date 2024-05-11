@@ -12,10 +12,6 @@ export interface IProduct {
     thumbnails: IThumbnails,
 }
 
-export interface IProductWithSize extends Omit<IProduct, 'selectedSize'> {
-    selectedSize: { sizeId: number; num: string };
-  }
-
 export interface IThumbnails {
     thumb: string,
 }
