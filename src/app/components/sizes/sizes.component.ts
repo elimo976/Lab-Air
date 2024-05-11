@@ -12,6 +12,7 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./sizes.component.css']
 })
 export class SizesComponent {
+  
   sizesShoes = [
     { id: 1, num: 'EU 36' },
     { id: 2, num: 'EU 37' },
@@ -45,41 +46,9 @@ export class SizesComponent {
 
 
   selectSize(size: any) {
+    console.log('Taglia seleziona:', size);
     this.selectedSize = size;
     this.errorMessage = "";
-  }
-
-  addToCart() {
-    if (!this.selectedSize) {
-      this.errorMessage = "Seleziona una taglia";
-      return;
-    }
-
-    if (this.selectedSizesArray.length > 2) {
-      this.openCartLimitModal();
-      return;
-    }
-
-    this.selectedSizesArray.push(this.selectedSize);
-
-    const currentPrice = this.selectedSize.prezzo;
-    const totalPrice = this.countSelectedSizes() * currentPrice;
-
-    this.isPopupVisible = true;
-
-    if (this.selectedSize.id) {
-      this.getProductDetails();
-    }
-
-    setTimeout(() => {
-      this.closePopup();
-    }, 10000);
-
-    this.ps.getProductById(this.selectedSize.id)
-    .subscribe((product: IProduct) => {
-      this.cs.addToCart(product);
-    })
-
   }
 
   closePopup() {
@@ -94,18 +63,51 @@ export class SizesComponent {
     return this.selectedSizesArray.length;
   }
 
-  getProductDetails() {
-    this.route.params.subscribe(params => {
-      this.ps.getProductById(params['id'])
-        .subscribe(product => {
-          this.productDetails = product;
-        }),
-        (error: string) => {
-          console.error('Errore nella chiamata AJAX:', error);
-          this.errorMessage = 'Errore nel recupero delle informazioni del prodotto';
-        }
-    })
+  addToCart() {
+    if (!this.selectedSize) {
+      this.errorMessage = "Seleziona una taglia";
+      return;
+    }
+  
+    if (this.selectedSizesArray.length > 2) {
+      this.openCartLimitModal();
+      return;
+    }
+  
+    this.selectedSizesArray.push(this.selectedSize);
+  
+    const currentPrice = this.selectedSize.prezzo;
+    const totalPrice = this.countSelectedSizes() * currentPrice;
+  
+    this.isPopupVisible = true;
+  
+    if (this.selectedSize.id) {
+      this.getProductDetails();
+    }
+  
+    setTimeout(() => {
+      this.closePopup();
+    }, 10000);
   }
+  
+  getProductDetails() {
+    this.route.params.subscribe({
+      next: (params) => {
+        this.ps.getProductById(params['id']).subscribe({
+          next: (product: IProduct) => {
+            this.productDetails = product;
+            this.cs.addToCart(this.productDetails);
+          },
+          error: (error: any) => {
+            console.error('Errore nella chiamata AJAX:', error);
+            this.errorMessage = 'Errore nel recupero delle informazioni del prodotto';
+          }
+        });
+      }
+    });
+  }
+  
+  
 
   openCartLimitModal() {
     const modalRef = this.modalService.open(CartModalComponent);

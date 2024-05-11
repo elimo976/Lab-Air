@@ -10,14 +10,22 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartComponent {
 
   products: IProduct[] = [];
+  isLoading: boolean = false;
 
   constructor(private cs: CartService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.cs.getCartItems()
     .subscribe(cartItems => {
        this.products = cartItems;
+       this.isLoading = false;
     })
+  }
+
+  removeFromCart(index: number) {
+    this.cs.removeFromCart(index);
+    this.products.splice(index, 1);
   }
 
   LikelyFaves = [
@@ -31,8 +39,4 @@ export class CartComponent {
     { title: 'Tennis Racket', imageUrl: 'https://images.pexels.com/photos/1432039/pexels-photo-1432039.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' },
   ];
 
-  removeFromCart(index: number) {
-    this.cs.removeFromCart(index);
-    this.products.splice(index, 1);
-  }
 }
