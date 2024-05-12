@@ -278,6 +278,42 @@ li.submenu-item a:hover {
     justify-content: center;
   }
 
+  .containerButtons {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 3em auto 2em auto;
+  }
+  
+  .containerButtons button {
+      width: 100%;
+      font-size: 1em;
+      height: 4rem;
+      color: #000000;
+      padding: 5px 10px;
+      font-weight: 100;
+      margin-bottom: 10px;
+      background-color: transparent;
+      border-radius: 50px;
+  }
+  
+  .containerButtons .cart {
+      background-color: #000000;
+      color: #fff;
+      border: 1px solid #c8c8c8;
+  }
+  
+  .containerButtons .cart:hover {
+      opacity: 70%;
+  }
+  
+  .containerButtons .wish {
+      border: #dcdcdc 1px solid;
+  }
+  
+  .containerButtons .wish:hover {
+      border: 1px solid #000000;
+  }
+
 @media screen and (max-width: 768px) {
     .header-container {
         display: flex;

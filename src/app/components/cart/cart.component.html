@@ -25,13 +25,13 @@
                                     <p class="text-muted">{{ p.categoria }}</p>
                                     <div *ngIf="selectedSize && selectedSize[i]">
                                         <p>Taglia: {{ selectedSize[i].num }}</p>
-                                      </div>
+                                    </div>
                                     <div class="select-group d-flex">
                                         <select class="form-select me-3" aria-label="Default select example"
                                         (change)="changeSelectedSize($event, i)">
                                             <option selected>Cambia taglia</option>
                                             <option value="EU 36">EU 36</option>
-                                            <option value="EU37">EU 37</option>
+                                            <option value="EU 37">EU 37</option>
                                             <option value="EU 38">EU 38</option>
                                             <option value="EU 39">EU 39</option>
                                             <option value="EU 40">EU 40</option>
@@ -81,6 +81,16 @@
         </div>
         <div id="cart-right-summary">
             <h4>Riepilogo</h4>
+            <p>Hai un codice promozionale?</p>
+            <p>Subtotale</p>
+            <p>Costi di spedizione e gestione previsti</p>
+            <hr>
+            <p>Totale</p>
+            <hr>
+            <div class="containerButtons">
+                <button type="button" class="btn btn-dark cart">Vai al pagamento</button>
+                <button type="button" class="btn btn-outline-secondary paypal"><i class="bi bi-paypal"></i></button>
+            </div>
         </div>
     </div>
     <app-slider [title]="'Potrebbe piacerti anche'" [items]="LikelyFaves"></app-slider>

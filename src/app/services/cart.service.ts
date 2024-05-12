@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { IProduct } from '../models/product';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,6 +10,8 @@ export class CartService {
   private cartSubject = new BehaviorSubject<IProduct[]>([]);
   private localStorageKey = 'selectedSize';
   selectedSize: { id: number; num: string }[] = [];
+
+  sizeSelected = new EventEmitter<{ id: number; num: string }>();
 
   constructor() {
     const savedCartItems = localStorage.getItem('cartItems');
@@ -45,14 +47,6 @@ export class CartService {
     return this.cartSubject.asObservable();
   }
 
-  // setSelectedSize(size: { id: number; num: string }) {
-  //   const isSizeExist = this.selectedSize.some(s => s.id === size.id);
-  //   if(!isSizeExist) {
-  //     this.selectedSize.push(size);
-  //     localStorage.setItem(this.localStorageKey, JSON.stringify(this.selectedSize));
-  //   }
-  // }
-
   getSelectedSize(): { id: number; num: string }[] {
     return JSON.parse(localStorage.getItem(this.localStorageKey) || '[]') as { id: number; num: string }[];
   }
@@ -64,8 +58,6 @@ export class CartService {
     localStorage.setItem(this.localStorageKey, JSON.stringify(selectedSizes));
   }
   
-  
-
   removeSelectedSize(index: number) {
     localStorage.removeItem(this.localStorageKey);
     this.selectedSize.splice(index, 1);

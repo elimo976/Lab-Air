@@ -60,7 +60,7 @@ padding: 20px 20px 10px 20px;
 }
 
 #cart-right-summary {
-    width: 35%;
+    width: 320px;
 }
 
 .cart-items-info select {
@@ -73,4 +73,9 @@ padding: 20px 20px 10px 20px;
  text-decoration: none;
  color: #323232;
  margin-right: .8em;
+}
+
+.containerButtons .paypal{
+    background-color: #eeeeee;
+    border: 1px solid #dfdfdf;
 }

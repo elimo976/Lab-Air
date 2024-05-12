@@ -35,7 +35,6 @@ export class SizesComponent {
   isPopupVisible: boolean = false;
   productDetails?: IProduct;
   selectedSizesArray: any[] = [];
-  totalPrice: number = 0;
 
   constructor(
     private ps: ProductService,
@@ -76,10 +75,7 @@ export class SizesComponent {
     }
   
     this.selectedSizesArray.push(this.selectedSize);
-  
-    const currentPrice = this.selectedSize.prezzo;
-    const totalPrice = this.countSelectedSizes() * currentPrice;
-  
+    
     this.isPopupVisible = true;
   
     if (this.selectedSize.id) {

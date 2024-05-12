@@ -9,8 +9,7 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartComponent {
 
-  products: IProduct[] = [];
-  
+  products: IProduct[] = [];  
 
   constructor(private cs: CartService) { }
 
