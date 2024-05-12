@@ -10,6 +10,7 @@ export interface IProduct {
     nuovi_arrivi: boolean;
     best_seller: number,
     thumbnails: IThumbnails,
+    quantity: number;
 }
 
 export interface IThumbnails {
@@ -28,6 +29,7 @@ export class ProductDTO {
     nuovi_arrivi: boolean = false;
     best_seller: number = 0;
     thumbnails: ThumbnailsDTO = new ThumbnailsDTO();
+    quantity: number = 0;
 }
 
 export class ThumbnailsDTO {

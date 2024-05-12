@@ -10,6 +10,7 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartComponent {
 
   products: IProduct[] = [];  
+  subTotal: number = 0;
 
   constructor(private cs: CartService) { }
 
@@ -21,6 +22,12 @@ export class CartComponent {
 
     this.selectedSize = this.cs.selectedSize;
     console.log('Valore di selectedSize nel CartComponent:', this.selectedSize);
+
+    this.cs.getCartItems()
+    .subscribe(data => {
+      this.products = data;
+      this.subTotal = this.cs.calculateTotal();
+    })
   }
 
   removeFromCart(index: number) {
@@ -55,7 +62,19 @@ export class CartComponent {
   } else {
     console.error("Valore della taglia non valido.");
   }
-}
+  }
+
+  updateQuantity(event: any, index: number) {
+    const quantity = parseInt(event.target.value);
+    this.products[index].quantity = quantity;
+    this.updateSubTotal(); // Aggiorna il subtotale quando cambia la quantità
+  }
+  
+  updateSubTotal() {
+    this.subTotal = this.products.reduce((total, product) => total + (product.prezzo * (product.quantity || 1)), 0);
+  }
+  
+
 
 
 

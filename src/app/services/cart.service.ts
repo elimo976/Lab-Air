@@ -63,4 +63,9 @@ export class CartService {
     this.selectedSize.splice(index, 1);
     localStorage.setItem(this.localStorageKey, JSON.stringify(this.selectedSize));
   }
+
+  calculateTotal(): number {
+    return this.cartItems.reduce((total, product) => total + product.prezzo, 0);
+  }
+  
 }

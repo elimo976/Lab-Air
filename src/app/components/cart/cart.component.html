@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="wrap m-4">
-    <div id="cart-view" class="d-flex gap-4">
+    <div id="cart-view" class="d-flex gap-4 mt-5">
         <div id="cart-left-container">
             <div id="cart-container" class="mb-3">
                 <h5>Spedizione gratuita per i Member.</h5>
@@ -44,8 +44,7 @@
                                             <option value="EU 47">EU 47</option>
                                             <option value="EU 48">EU 48</option>
                                           </select>
-                                          <select class="form-select" aria-label="Default select example">
-                                            <option>Quantità</option>
+                                          <select class="form-select" aria-label="Default select example" [(ngModel)]="p.quantity" (change)="updateQuantity($event, i)">
                                             <option selected value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -79,13 +78,38 @@
                 </div>
             </div>
         </div>
-        <div id="cart-right-summary">
-            <h4>Riepilogo</h4>
-            <p>Hai un codice promozionale?</p>
-            <p>Subtotale</p>
-            <p>Costi di spedizione e gestione previsti</p>
+        <div id="cart-right-summary" class="fs-6">
+            <h4 class="mb-4">Riepilogo</h4>
+            <div ngbAccordion>
+                <div ngbAccordionItem class="accordion">
+                  <h2 ngbAccordionHeader>
+                    <button ngbAccordionButton class="px-0">Hai un codice promozionale?</button>
+                  </h2>
+                  <div ngbAccordionCollapse>
+                    <div ngbAccordionBody>
+                      <ng-template>
+                        <div class="d-flex justify-content-between">
+                            <input class="form-control" type="text">
+                            <button type="button" class="accordionButton">Applica</button>
+                        </div>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="subtotal d-flex justify-content-between">
+                <p>Subtotale</p>
+                <p>{{subTotal | localCurrency: 'EUR'}}</p>
+            </div>
+            <div class="shippingCost d-flex justify-content-between">
+                <p class="me-3">Costi di spedizione e gestione previsti</p>
+                <p>Gratis</p>
+            </div>
             <hr>
-            <p>Totale</p>
+            <div class="total d-flex justify-content-between">
+                <p>Totale</p>
+                <p class="fw-bold">0</p>
+            </div>
             <hr>
             <div class="containerButtons">
                 <button type="button" class="btn btn-dark cart">Vai al pagamento</button>
