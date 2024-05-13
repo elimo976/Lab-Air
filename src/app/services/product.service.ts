@@ -12,11 +12,11 @@ export class ProductService {
 
 
   getProducts() {
-    return this.http.get<IProduct[]>(environment.base_url);
+    return this.http.get<IProduct[]>(`${environment.base_url}prodotti/`);
   }
 
   getProductById(id: number) {
-    return this.http.get<IProduct>(environment.base_url + id);
+    return this.http.get<IProduct>(`${environment.base_url}prodotti/` + id);
   }
 
 }

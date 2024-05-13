@@ -64,7 +64,7 @@ export class CartService {
     localStorage.setItem(this.localStorageKey, JSON.stringify(this.selectedSize));
   }
 
-  calculateTotal(): number {
+  calculateSubTotal(): number {
     return this.cartItems.reduce((total, product) => total + product.prezzo, 0);
   }
   

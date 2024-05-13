@@ -1,3 +1,3 @@
 export const environment = {
-    base_url: "http://localhost:3000/prodotti/"
+    base_url: "http://localhost:3000/"
 };

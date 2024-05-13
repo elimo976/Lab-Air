@@ -103,8 +103,12 @@
             </div>
             <div class="shippingCost d-flex justify-content-between">
                 <p class="me-3">Costi di spedizione e gestione previsti</p>
-                <p>Gratis</p>
+                <p>
+                    <span *ngIf="subTotal <= 90; else gratis">5€</span>
+                    <ng-template #gratis>Gratis</ng-template>
+                  </p>
             </div>
+            
             <hr>
             <div class="total d-flex justify-content-between">
                 <p>Totale</p>

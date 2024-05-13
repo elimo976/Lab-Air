@@ -24,7 +24,7 @@ export class FiltersService {
 
   // filterByCategory
   getCategorie(): Observable<string[]> {
-    return this.http.get<ProductDTO[]>(`${environment.base_url}`)
+    return this.http.get<ProductDTO[]>(`${environment.base_url}prodotti/`)
       .pipe(
         map(products => {
           const categorie = Array.from(new Set(products.map(product => product.categoria)));
@@ -50,7 +50,7 @@ export class FiltersService {
 
   // filterByBestSeller
   getProductsByBestSeller(best_seller_gte: number, best_seller_lte: number): Observable<IProduct[]> {
-    const url = `${environment.base_url}?best_seller_gte=${best_seller_gte}&best_seller_lte=${best_seller_lte}`
+    const url = `${environment.base_url}prodotti/?best_seller_gte=${best_seller_gte}&best_seller_lte=${best_seller_lte}`
     return this.http.get<IProduct[]>(url)
       .pipe(
         map(
@@ -96,7 +96,7 @@ export class FiltersService {
       }
     });
 
-    return this.http.get<IProduct[]>(`${environment.base_url}?`, { params }).pipe(
+    return this.http.get<IProduct[]>(`${environment.base_url}prodotti/?`, { params }).pipe(
       catchError(error => {
         console.error("Si è verificato un errore durante il recupero dei prodotti", error);
         throw error;
@@ -106,7 +106,7 @@ export class FiltersService {
 
   // filterByColor
   getColors(): Observable<string[]> {
-    return this.http.get<IProduct[]>(`${environment.base_url}`)
+    return this.http.get<IProduct[]>(`${environment.base_url}prodotti/`)
     .pipe(
       mergeMap(products => {
         const availableColors: string[] = products.reduce((acc, product) => {
@@ -138,7 +138,7 @@ export class FiltersService {
 
   getProductsByColor(color: string): Observable<IProduct[]> {
     console.log('Chiamata HTTP per ottenere prodotti con colore:', color);
-    return this.http.get<IProduct[]>(`${environment.base_url}?colori_disponibili_like=${color}`)
+    return this.http.get<IProduct[]>(`${environment.base_url}prodotti/?colori_disponibili_like=${color}`)
      .pipe(
         map(
           (data) => {

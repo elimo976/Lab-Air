@@ -11,6 +11,7 @@ export class CartComponent {
 
   products: IProduct[] = [];  
   subTotal: number = 0;
+  total: number = 0;
 
   constructor(private cs: CartService) { }
 
@@ -26,7 +27,7 @@ export class CartComponent {
     this.cs.getCartItems()
     .subscribe(data => {
       this.products = data;
-      this.subTotal = this.cs.calculateTotal();
+      this.subTotal = this.cs.calculateSubTotal();
     })
   }
 
@@ -67,13 +68,12 @@ export class CartComponent {
   updateQuantity(event: any, index: number) {
     const quantity = parseInt(event.target.value);
     this.products[index].quantity = quantity;
-    this.updateSubTotal(); // Aggiorna il subtotale quando cambia la quantità
+    this.updateSubTotal();
   }
   
   updateSubTotal() {
     this.subTotal = this.products.reduce((total, product) => total + (product.prezzo * (product.quantity || 1)), 0);
   }
-  
 
 
 
