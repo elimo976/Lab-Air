@@ -67,5 +67,14 @@ export class CartService {
   calculateSubTotal(): number {
     return this.cartItems.reduce((total, product) => total + product.prezzo, 0);
   }
+
+  calculateTotal(): number {
+    const subTotal = this.calculateSubTotal();
+    if (subTotal <= 90) {
+      return subTotal + 5;
+    } else {
+      return subTotal;
+    }
+  }
   
 }

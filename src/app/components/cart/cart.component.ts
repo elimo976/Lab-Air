@@ -28,6 +28,7 @@ export class CartComponent {
     .subscribe(data => {
       this.products = data;
       this.subTotal = this.cs.calculateSubTotal();
+      this.total = this.cs.calculateTotal();
     })
   }
 
@@ -69,10 +70,19 @@ export class CartComponent {
     const quantity = parseInt(event.target.value);
     this.products[index].quantity = quantity;
     this.updateSubTotal();
+    this.updateTotal();
   }
   
   updateSubTotal() {
     this.subTotal = this.products.reduce((total, product) => total + (product.prezzo * (product.quantity || 1)), 0);
+  }
+
+  updateTotal() {
+    this.total = this.subTotal;
+  
+    if (this.subTotal <= 90) {
+      this.total += 5;
+    }
   }
 
 
