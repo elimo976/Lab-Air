@@ -522,7 +522,8 @@ li.submenu-item a:hover {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 0 auto;
+        margin: 0;
+        padding: 0;
     }
 
     .right-side {
@@ -534,6 +535,10 @@ li.submenu-item a:hover {
         margin: 0 auto;
         position: absolute;
         top: 90%;
+    }
+
+    .right-side input {
+        font-size: .8rem;
     }
 
     .sub-container {

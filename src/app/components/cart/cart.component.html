@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="wrap m-4">
+<div class="wrapper">
     <div id="cart-view" class="d-flex gap-4 mt-5">
         <div id="cart-left-container">
             <div id="cart-container" class="mb-3">
@@ -69,7 +69,7 @@
                                     </div>
                                 </div>
                                 <div class="cart-item-price">
-                                    <p>{{ p.prezzo | localCurrency: 'EUR' }}</p>
+                                    {{ p.prezzo | localCurrency: 'EUR' }}
                                 </div>
                             </div>
                         </div>
