@@ -77,6 +77,10 @@
                     </ng-container>
                 </div>
             </div>
+            <div class="favourites">
+                <h4>Preferiti</h4>
+                <p>Vuoi visualizzare i preferiti? <a href="#">Unisciti a noi</a> o <a href="#">Accedi</a></p>
+            </div>
         </div>
         <div id="cart-right-summary" class="fs-6">
             <h4 class="mb-4">Riepilogo</h4>
@@ -117,10 +121,12 @@
             <hr>
             <div class="containerButtons">
                 <button type="button" class="btn btn-dark cart">Vai al pagamento</button>
-                <button type="button" class="btn btn-outline-secondary paypal"><i class="bi bi-paypal"></i></button>
+                <button id="paypal" type="button" class="btn btn-outline-secondary paypal"><i class="bi bi-paypal"></i></button>
             </div>
         </div>
     </div>
-    <app-slider [title]="'Potrebbe piacerti anche'" [items]="LikelyFaves"></app-slider>
+    <div class="slider-container ms-4 mb-4">
+        <app-slider [title]="'Potrebbe piacerti anche'" [items]="LikelyFaves"></app-slider>
+    </div>
 </div>
 <app-footer></app-footer>

@@ -92,6 +92,14 @@ padding: 20px 20px 10px 20px;
     margin-left: 1em;
 }
 
+.favourites {
+    font-size: 1rem;
+}
+
+.favourites a {
+    color: #7c7c7c;
+}
+
 @media screen and (max-width: 768px) {
     #cart-right-summary {
         width: 200px;
@@ -142,5 +150,19 @@ padding: 20px 20px 10px 20px;
 
     .cart-item-price {
         background-color: #ffffff;
+    }
+
+    .containerButtons {
+        margin: 0 auto;
+        padding: 0;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #ffffff;
+    }
+
+    #paypal {
+        margin-bottom: 0;
     }
 }
