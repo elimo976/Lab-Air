@@ -79,7 +79,7 @@
             </div>
             <div class="favourites">
                 <h4>Preferiti</h4>
-                <p>Vuoi visualizzare i preferiti? <a href="#">Unisciti a noi</a> o <a href="#">Accedi</a></p>
+                <p>Vuoi visualizzare i preferiti? <a routerLink="/construction">Unisciti a noi</a> o <a routerLink="/login">Accedi</a></p>
             </div>
         </div>
         <div id="cart-right-summary" class="fs-6">
@@ -120,8 +120,8 @@
             </div>
             <hr>
             <div class="containerButtons">
-                <button type="button" class="btn btn-dark cart">Vai al pagamento</button>
-                <button id="paypal" type="button" class="btn btn-outline-secondary paypal"><i class="bi bi-paypal"></i></button>
+                <button type="button" class="btn btn-dark cart" routerLink="/login">Vai al pagamento</button>
+                <button id="paypal" type="button" class="btn btn-outline-secondary paypal" (click)="redirectToLinkPayPal()"><i class="bi bi-paypal"></i></button>
             </div>
         </div>
     </div>

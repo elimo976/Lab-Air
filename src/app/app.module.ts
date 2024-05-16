@@ -9,8 +9,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { UnderConstructionComponent } from './components/under-construction/under-construction.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeroBannerComponent } from './components/hero-banner/hero-banner.component';
-import { NgbAccordionModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { NgbAccordionModule, NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { SliderComponent } from './components/slider/slider.component';
 import { HistoryComponent } from './components/history/history.component';
@@ -28,6 +28,7 @@ import { FilterByNamePipe } from './Pipes/filter-by-name.pipe';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ColorLabelComponent } from './components/color-label/color-label.component';
 import { CartComponent } from './components/cart/cart.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -53,12 +54,15 @@ import { CartComponent } from './components/cart/cart.component';
     SpinnerComponent,
     ColorLabelComponent,
     CartComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    NgbToastModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbCarouselModule,
     NgbAccordionModule,
     HttpClientModule,

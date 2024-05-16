@@ -85,7 +85,9 @@ export class CartComponent {
     }
   }
 
-
+  redirectToLinkPayPal(){
+    window.open("https://www.paypal.com/it/home", "_blank");
+  }
 
 
   LikelyFaves = [
