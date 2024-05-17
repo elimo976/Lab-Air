@@ -1,2 +1,14 @@
-<p>shipping-form works!</p>
+<form [formGroup]="shippingForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="firstName" class="form-label">Nome</label>
+    <input type="text" class="form-control" id="firstName" formControlName="firstName">
+    <div *ngIf="shippingForm.get('firstName')!.invalid && (shippingForm.get('firstName')!.dirty || shippingForm.get('firstName')!.touched)" class="text-danger">
+      Nome è obbligatorio
+    </div>
+  </div>
+  <!-- Aggiungi gli altri campi del form qui con le rispettive validazioni -->
+
+  <button type="submit" class="btn btn-primary">Salva e continua</button>
+</form>
+
 

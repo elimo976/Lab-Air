@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DefaultComponent {
 
+  shippingFormCompleted: boolean = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute 
@@ -16,5 +18,9 @@ export class DefaultComponent {
   navigateToShippingForm() {
     this.router.navigate(['shipping-form'], { relativeTo: this.route.parent });
 }
+
+  onShippingFormCompleted() {
+    this.shippingFormCompleted = true;
+  }
 
 }

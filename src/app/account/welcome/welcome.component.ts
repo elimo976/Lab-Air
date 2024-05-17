@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { IUser } from '../models/user.model';
 
 @Component({
   selector: 'app-welcome',
@@ -27,7 +26,7 @@ export class WelcomeComponent {
     this.currentUser = localStorage.getItem('currentUser');
   }
 
-  navigateToShippingForm() {
-    this.router.navigate(['welcome/shipping-form']);
+  navigateToDefaultPage() {
+    this.router.navigateByUrl('/account');
   }
 }

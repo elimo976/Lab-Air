@@ -7,14 +7,11 @@ import { ThankyouComponent } from './thankyou/thankyou.component';
 import { DefaultComponent } from './default/default.component';
 
 const routes: Routes = [
-  {
-    path: 'welcome',
-    component: WelcomeComponent,
-    children: [
+  { path: 'welcome', component: WelcomeComponent },
       {
         path: '',
-        component: DefaultComponent // Un componente generico da visualizzare di default
-      },
+        component: DefaultComponent,
+        children: [
       {
         path: 'shipping-form',
         component: ShippingFormComponent
@@ -22,13 +19,10 @@ const routes: Routes = [
       {
         path: 'payment-form',
         component: PaymentFormComponent
-      },
-      {
-        path: 'thankyou',
-        component: ThankyouComponent
       }
     ]
-  }
+  },
+      { path: 'thankyou', component: ThankyouComponent }
 ];
 
 @NgModule({
