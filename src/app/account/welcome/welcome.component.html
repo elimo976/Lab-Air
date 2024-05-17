@@ -1,0 +1,16 @@
+<div class="logo mt-4">
+  <img src="./assets/images/logo.png" alt="Logo">
+</div>
+<div class="container">
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-6">
+      <div class="text-center">
+        <h1 class="mb-4">Benvenuto!</h1>
+        <ng-container *ngIf="currentUser">
+          <p>Benvenuto, <strong>{{currentUser}}</strong> ! Grazie per esserti unito alla LabAir Community.</p>
+        </ng-container>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

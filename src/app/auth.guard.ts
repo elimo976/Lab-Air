@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, catchError, map, of } from 'rxjs';
 import { AuthService } from './services/auth.service';
-import { LoginComponent } from './components/login/login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +20,7 @@ export class AuthGuard implements CanActivate {
       const email = route.queryParams['email'];
       const password = route.queryParams['password'];
 
-    return this.authService.authenticate(email, password).pipe(
+    return this.authService.isAuthenticated().pipe(
       map((authenticated: boolean) => {
         if (authenticated) {
           return true;

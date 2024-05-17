@@ -1,0 +1,24 @@
+.logo {
+    width: 60px;
+}
+
+.logo img {
+    max-width: 100%;
+}
+
+@media screen and (max-width: 768px){
+    .container {
+        margin-top: 5em;
+    }
+
+    .container button {
+        padding: 6px 12px;
+        font-size: 1rem;
+    }
+
+    .logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}

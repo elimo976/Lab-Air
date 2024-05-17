@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 interface ToastConfig {
@@ -45,10 +45,10 @@ export class LoginComponent {
     const email = this.loginFrm.get('email')?.value ?? '';
     const password = this.loginFrm.get('password')?.value ?? '';
   
-    this.authService.authenticate(email, password)
-      .subscribe((authenticated: boolean) => {
-        if(authenticated) {
-          this.router.navigateByUrl('/account/shipping-form');
+    this.authService.login(email, password)
+      .subscribe((loggedIn: boolean) => {
+        if (loggedIn) {
+          this.router.navigateByUrl('/account/welcome');
         } else {
           this.toastConfig = {
             cssClass: "bg-danger",
@@ -60,6 +60,5 @@ export class LoginComponent {
         }
       });
   }
-  
 }  
 
