@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormService } from '../services/form.service';
 
 @Component({
   selector: 'app-default',
@@ -8,19 +9,26 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DefaultComponent {
 
-  shippingFormCompleted: boolean = false;
+  shippingFormCompleted = false;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute 
-  ) { }
-
-  navigateToShippingForm() {
-    this.router.navigate(['shipping-form'], { relativeTo: this.route.parent });
-}
-
-  onShippingFormCompleted() {
-    this.shippingFormCompleted = true;
+    private route: ActivatedRoute,
+    private formService: FormService
+  ) {
+    this.formService.shippingFormCompleted$.subscribe(completed => {
+      this.shippingFormCompleted = completed;
+    });
   }
 
+  navigateToPaymentForm() {
+    if (this.shippingFormCompleted) {
+      this.router.navigate(['payment-form'], { relativeTo: this.route.parent });
+    }
+  }
+
+  onShippingFormSubmitted() {
+    this.shippingFormCompleted = true;
+  }
 }
+

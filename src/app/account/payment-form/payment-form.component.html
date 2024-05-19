@@ -1,1 +1,55 @@
-<p>payment-form works!</p>
+<div class="container mt-4">
+    <h5 class="fw-bold mb-3">Seleziona metodo di pagamento</h5>
+    <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" formControlName="paymentMethod" id="creditDebitCard" value="creditDebitCard">
+          <label class="form-check-label" for="creditDebitCard">
+            <i class="bi bi-credit-card"><span class="ms-3">Carta di credito o debito</span></i>
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" formControlName="paymentMethod" id="paypal" value="paypal">
+          <label class="form-check-label" for="paypal">
+            <i class="bi bi-paypal"><span class="ms-3">PayPal</span></i>
+          </label>
+        </div>
+        <div class="form-check" id="googlePay">
+          <input class="form-check-input" type="radio" formControlName="paymentMethod" id="gPay" value="gPay">
+          <label class="form-check-label" for="gPay">
+            <button type="button" (click)="selectGPay()"><i class="bi bi-google">Pay</i></button>
+          </label>
+        </div>
+        <div class="addCard mt-4">
+            <h5 class="fw-bold mb-3">Aggiungi carta</h5>
+            <div class="addCardData d-flex">
+                <div class="creditCardNumber w-50 me-2">
+                    <input type="text" class="form-control" id="creditCardNumber" formControlName="creditCardNumber" placeholder="Numero carta">
+                    <div *ngIf="creditCardNumber!.invalid && (creditCardNumber!.dirty || creditCardNumber!.touched)">
+                        <span class="text-danger fs-6 mt-2 ms-1">
+                            {{ creditCardNumber!.errors?.['required'] ? 'Numero carta obbligatorio' : (creditCardNumber!.errors?.['minlength'] ? 'Inserire almeno 16 caratteri' : (creditCardNumber!.errors?.['pattern'] ? 'Inserire numero di carta valido' : '')) }}
+                        </span>
+                    </div>
+                </div>
+                <div class="expirationDate me-2">
+                    <input type="text" class="form-control" id="expirationDate" formControlName="expirationDate" placeholder="MM/AA">
+                    <div *ngIf="expirationDate!.invalid && (expirationDate!.dirty || expirationDate!.touched)">
+                        <span class="text-danger fs-6 mt-2 ms-1">
+                            {{ expirationDate!.errors?.['required'] ? 'Data di scadenza obbligatoria' : (expirationDate!.errors?.['pattern'] ? 'Inserire data di scadenza valida' : '') }}
+                        </span>
+                    </div>
+                </div>
+                <div class="cvv">
+                    <input type="text" class="form-control" id="cvv" formControlName="cvv" placeholder="CVV">
+                    <div *ngIf="cvv!.invalid && (cvv!.dirty || cvv!.touched)">
+                        <span class="text-danger fs-6 mt-2 ms-1">
+                            {{ cvv!.errors?.['required'] ? 'CVV obbligatorio' : (cvv!.errors?.['minlength'] ? 'Inserire almeno 3 caratteri' : (cvv!.errors?.['pattern'] ? 'Inserire CVV valido' : '')) }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <a class="text-dark fs-6 d-flex justify-content-end mt-3 me-3" href="https://www.cvvnumber.com/cvv.html" target="_blank">Where is my CVV?</a>
+        </div>
+        <button type="submit" class="btn btn-dark mt-4" [disabled]="paymentForm.invalid">Passa alla verifica dell'ordine</button>
+      </form>
+</div>
+  

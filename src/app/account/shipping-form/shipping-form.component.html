@@ -1,10 +1,10 @@
 <form [formGroup]="shippingForm" (ngSubmit)="onSubmit()">
-  <div class="mt-5 mb-4 d-flex">
+  <div class="nameDetails mt-5 mb-4 d-flex">
     <div class="name me-3 w-100">
       <input type="text" class="form-control" id="name" formControlName="name" placeholder="Nome*">
       <div *ngIf="name!.invalid && (name!.dirty || name!.touched)">
         <span class="text-danger fs-6 mt-2 ms-1">
-          {{ name!.errors?.['required'] ? 'Nome obbligatorio' : (name!.errors?.['minlength'] ? 'Inserire almeno 3 caratteri' : (name!.errors?.['pattern'] ? 'Inserire un nome valido' : '')) }}
+          {{ name!.errors?.['required'] ? 'Nome obbligatorio' : (name!.errors?.['minlength'] ? 'Inserire almeno 2 caratteri' : (name!.errors?.['pattern'] ? 'Inserire un nome valido' : '')) }}
         </span>
       </div>
     </div>
@@ -12,7 +12,7 @@
       <input type="text" class="form-control" id="surName" formControlName="surName" placeholder="Cognome*">
       <div *ngIf="surName!.invalid && (surName!.dirty || surName!.touched)">
         <span class="text-danger fs-6 mt-2 ms-1">
-          {{ surName!.errors?.['required'] ? 'Cognome obbligatorio' : (surName!.errors?.['minlength'] ? 'Inserire almeno 3 caratteri' : (surName!.errors?.['pattern'] ? 'Inserire un cognome valido' : '')) }}
+          {{ surName!.errors?.['required'] ? 'Cognome obbligatorio' : (surName!.errors?.['minlength'] ? 'Inserire almeno 2 caratteri' : (surName!.errors?.['pattern'] ? 'Inserire un cognome valido' : '')) }}
         </span>
       </div>
     </div>
@@ -20,12 +20,51 @@
   <input type="text" class="form-control" id="address" formControlName="address" placeholder="Via e numero civico*">
   <div *ngIf="address!.invalid && (address!.dirty || address!.touched)">
     <span class="text-danger fs-6 mt-2 ms-1">
-      {{ address!.errors?.['required'] ? 'Via e numero civico sono obbligatori' : (address!.errors?.['minlength'] ? 'Inserire almeno 4 caratteri' : (address!.errors?.['pattern'] ? 'Inserire un indirizzo valido' : '')) }}
+      {{ address!.errors?.['required'] ? 'Via e numero civico obbligatori' : (address!.errors?.['minlength'] ? 'Inserire almeno 4 caratteri' : (address!.errors?.['pattern'] ? 'Inserire un indirizzo valido' : '')) }}
     </span>
   </div>
-  
+  <div class="countryDetails mt-4 d-flex">
+    <div class="cap me-3 w-100">
+      <input type="text" class="form-control" id="cap" formControlName="cap" placeholder="Cap*">
+      <div *ngIf="cap!.invalid && (cap!.dirty || cap!.touched)">
+        <span class="text-danger fs-6 mt-2 ms-1">
+          {{ cap!.errors?.['required'] ? 'Cap obbligatorio' : (cap!.errors?.['pattern'] ? 'Inserire un CAP valido di 5 cifre' : '') }}
+        </span>
+      </div>
+    </div>
+    <div class="city me-3 w-100">
+      <input type="text" class="form-control" id="city" formControlName="city" placeholder="Città*">
+      <div *ngIf="city!.invalid && (city!.dirty || city!.touched)">
+        <span class="text-danger fs-6 mt-2 ms-1">
+          {{ city!.errors?.['required'] ? 'Città obbligatoria' : (city!.errors?.['minlength'] ? 'Inserire almeno 2 caratteri' : (city!.errors?.['pattern'] ? 'Inserire una città valida' : '')) }}
+        </span>
+      </div>
+    </div>
+    <div class="country w-100">
+      <input type="text" class="form-control" id="country" placeholder="Italia" disabled>
+    </div>
+  </div>
+  <div class="contactsDetails mt-4 d-flex">
+    <div class="email me-3 w-100">
+      <input type="text" class="form-control" id="email" formControlName="email" placeholder="Email*">
+      <div *ngIf="email!.invalid && (email!.dirty || email!.touched)">
+        <span class="text-danger fs-6 mt-2 ms-1">
+          {{ email!.errors?.['required'] ? 'Email obbligatorio' : (email!.errors?.['minlength'] ? 'Inserire almeno 10 caratteri' : (email!.errors?.['pattern'] ? 'Inserire un indirizzo email valido' : '')) }}
+        </span>
+      </div>
+    </div>
+    <div class="phone w-100">
+      <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="Numero di telefono*">
+      <div *ngIf="phone!.invalid && (phone!.dirty || phone!.touched)">
+        <span class="text-danger fs-6 mt-2 ms-1">
+          {{ phone!.errors?.['required'] ? 'Numero di telefono obbligatorio' : (phone!.errors?.['pattern'] ? 'Inserire un numero di telefono valido' : '') }}
+        </span>
+        
+      </div>
+    </div>
+  </div>
   <button type="submit" class="btn btn-dark mt-4
-  ">Salva e continua</button>
+  " [disabled]="shippingForm.invalid">Salva e continua</button>
 </form>
 
 

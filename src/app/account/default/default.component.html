@@ -1,22 +1,19 @@
 <div id="logo" class="m-4">
-    <img src="./assets/images/logo.png" alt="Logo">
+  <img src="./assets/images/logo.png" alt="Logo" routerLink="/home">
 </div>
 <div class="container mt-3">
-    <h3 class="text-center">Pagamento</h3>
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" [routerLink]="['shipping-form']">Dati spedizione</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['payment-form']" [class.disabled]="!shippingFormCompleted">Dati pagamento</a>
-        </li>
-      </ul>
-      
-      <div class="tab-content">
-        <router-outlet></router-outlet>
-      </div>
-      <div class="tab-content">
-        <router-outlet></router-outlet>
-      </div>
-      
+  <h3 class="text-center mb-5">Pagamento</h3>
+  <ul class="nav nav-tabs">
+      <li class="nav-item actived">
+        <a class="nav-link" [routerLink]="['shipping-form']">Dati spedizione</a>
+      </li>
+      <li class="nav-item actived">
+        <a class="nav-link" [routerLink]="['payment-form']" [class.disabled]="!shippingFormCompleted">Dati pagamento</a>
+      </li>
+    </ul>
+    
+    <div class="tab-content">
+      <router-outlet></router-outlet>
+    </div>
 </div>
+
