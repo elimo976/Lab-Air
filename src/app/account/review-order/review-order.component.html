@@ -1,1 +1,21 @@
-<p>review-order works!</p>
+<div id="logo" class="m-4">
+    <img src="./assets/images/logo.png" alt="Logo" routerLink="/home">
+  </div>
+<div class="container">
+    <h3 class="text-center">Verifica i tuoi dati</h3>
+    <hr>
+    <div class="shipping-details">
+      <h4>Dettagli Spedizione</h4>
+      <p>{{shippingData.name}} {{shippingData.surName}}<br>
+      {{shippingData.address}}<br>
+      {{shippingData.cap}} - {{shippingData.city}}</p>
+      <p>{{shippingData.email}}<br>
+      {{shippingData.phone}}</p>
+    </div>
+    <div class="payment-details">
+      <h4>Dettagli Pagamento</h4>
+      <p>Metodo di pagamento: {{paymentData.paymentMethod === 'creditDebitCard'? 'Carta di credito o debito': (paymentData.paymentMethod === 'paypal'? 'PayPal' : 'Google Pay')}}<br>
+      <span *ngIf="paymentData.paymentMethod === 'creditDebitCard'">Numero di carta: {{ maskedCreditCardNumber }}</span></p>
+    </div>
+    <a [routerLink]="['/account/shipping-form']">modifica</a>
+</div>

@@ -23,7 +23,7 @@
             <h5 class="fw-bold mb-3">Aggiungi carta</h5>
             <div class="addCardData d-flex">
                 <div class="creditCardNumber w-50 me-2">
-                    <input type="text" class="form-control" id="creditCardNumber" formControlName="creditCardNumber" placeholder="Numero carta" [disabled]="paymentForm.get('paymentMethod')?.value !== 'creditDebitCard'">
+                    <input type="text" class="form-control" id="creditCardNumber" formControlName="creditCardNumber" placeholder="Numero carta">
                     <div *ngIf="creditCardNumber!.invalid && (creditCardNumber!.dirty || creditCardNumber!.touched)">
                         <span class="text-danger fs-6 mt-2 ms-1">
                             {{ creditCardNumber!.errors?.['required'] ? 'Numero carta obbligatorio' : (creditCardNumber!.errors?.['minlength'] ? 'Inserire almeno 16 caratteri' : (creditCardNumber!.errors?.['pattern'] ? 'Inserire numero di carta valido' : '')) }}
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="expirationDate me-2">
-                    <input type="text" class="form-control" id="expirationDate" formControlName="expirationDate" placeholder="MM/AA" [disabled]="paymentForm.get('paymentMethod')?.value !== 'creditDebitCard'">
+                    <input type="text" class="form-control" id="expirationDate" formControlName="expirationDate" placeholder="MM/AA">
                     <div *ngIf="expirationDate!.invalid && (expirationDate!.dirty || expirationDate!.touched)">
                         <span class="text-danger fs-6 mt-2 ms-1">
                             {{ expirationDate!.errors?.['required'] ? 'Data di scadenza obbligatoria' : (expirationDate!.errors?.['pattern'] ? 'Inserire data di scadenza valida' : '') }}
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="cvv">
-                    <input type="text" class="form-control" id="cvv" formControlName="cvv" placeholder="CVV" [disabled]="paymentForm.get('paymentMethod')?.value !== 'creditDebitCard'">
+                    <input type="text" class="form-control" id="cvv" formControlName="cvv" placeholder="CVV">
                     <div *ngIf="cvv!.invalid && (cvv!.dirty || cvv!.touched)">
                         <span class="text-danger fs-6 mt-2 ms-1">
                             {{ cvv!.errors?.['required'] ? 'CVV obbligatorio' : (cvv!.errors?.['minlength'] ? 'Inserire almeno 3 caratteri' : (cvv!.errors?.['pattern'] ? 'Inserire CVV valido' : '')) }}

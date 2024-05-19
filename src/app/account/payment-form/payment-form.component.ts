@@ -20,10 +20,32 @@ export class PaymentFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.paymentForm = new FormGroup({
-      paymentMethod: new FormControl('creditDebitCard', [Validators.required]),
-      creditCardNumber: new FormControl('', [Validators.required, Validators.pattern(/(^[0-9]{16}$)/), Validators.minLength(16)]),
-      cvv: new FormControl('', [Validators.required, Validators.pattern(/(^[0-9]{3}$)/), Validators.minLength(3)]),
-      expirationDate: new FormControl('', [Validators.required, Validators.pattern(/(^[0-9]{2}\/[0-9]{2}$)/)]),
+      paymentMethod: new FormControl('creditDebitCard', Validators.required),
+      creditCardNumber: new FormControl({ value: '', disabled: true }, [
+        Validators.required,
+        Validators.pattern(/^\d{16}$/),
+        Validators.minLength(16)
+      ]),
+      expirationDate: new FormControl({ value: '', disabled: true }, [
+        Validators.required,
+        Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)
+      ]),
+      cvv: new FormControl({ value: '', disabled: true }, [
+        Validators.required,
+        Validators.pattern(/^\d{3}$/)
+      ])
+    });
+
+    this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(value => {
+      if (value === 'creditDebitCard') {
+        this.paymentForm.get('creditCardNumber')?.enable();
+        this.paymentForm.get('expirationDate')?.enable();
+        this.paymentForm.get('cvv')?.enable();
+      } else {
+        this.paymentForm.get('creditCardNumber')?.disable();
+        this.paymentForm.get('expirationDate')?.disable();
+        this.paymentForm.get('cvv')?.disable();
+      }
     });
     this.subscribeToPaymentFormData();
   }
