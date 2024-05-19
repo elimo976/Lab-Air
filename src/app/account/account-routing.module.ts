@@ -5,6 +5,7 @@ import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 import { PaymentFormComponent } from './payment-form/payment-form.component';
 import { ThankyouComponent } from './thankyou/thankyou.component';
 import { DefaultComponent } from './default/default.component';
+import { ReviewOrderComponent } from './review-order/review-order.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -22,7 +23,8 @@ const routes: Routes = [
       }
     ]
   },
-      { path: 'thankyou', component: ThankyouComponent }
+  { path: 'reviewOrder', component: ReviewOrderComponent },
+  { path: 'thankyou', component: ThankyouComponent }
 ];
 
 @NgModule({

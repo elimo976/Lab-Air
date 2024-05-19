@@ -12,9 +12,18 @@ export class FormService {
   private shippingFormDataSubject = new BehaviorSubject<any>(this.getShippingFormDataFromLocalStorage());
   shippingFormData$ = this.shippingFormDataSubject.asObservable();
 
+  private paymentFormCompletedSubject = new BehaviorSubject<boolean>(false);
+  paymentFormCompleted$ = this.paymentFormCompletedSubject.asObservable();
+
+  private paymentFormDataSubject = new BehaviorSubject<any>(this.getPaymentFormDataFromLocalStorage());
+  paymentFormData$ = this.paymentFormDataSubject.asObservable();
+
   constructor() { 
     const completed = this.getShippingFormCompletedFromLocalStorage();
     this.shippingFormCompletedSubject.next(completed);
+
+    const paymentCompleted = this.getPaymentFormCompletedFromLocalStorage();
+    this.paymentFormCompletedSubject.next(paymentCompleted);
   }
 
   setShippingFormCompleted(completed: boolean) {
@@ -27,6 +36,16 @@ export class FormService {
     localStorage.setItem('shippingFormData', JSON.stringify(data));
   }
 
+  setPaymentFormCompleted(completed: boolean) {
+    this.paymentFormCompletedSubject.next(completed);
+    localStorage.setItem('paymentFormCompleted', JSON.stringify(completed));
+  }
+
+  setPaymentFormData(data: any) {
+    this.paymentFormDataSubject.next(data);
+    localStorage.setItem('paymentFormData', JSON.stringify(data));
+  }
+
   private getShippingFormCompletedFromLocalStorage(): boolean {
     const data = localStorage.getItem('shippingFormCompleted');
     return data ? JSON.parse(data) : false;
@@ -37,10 +56,26 @@ export class FormService {
     return data ? JSON.parse(data) : {};
   }
 
+  private getPaymentFormCompletedFromLocalStorage(): boolean {
+    const data = localStorage.getItem('paymentFormCompleted');
+    return data? JSON.parse(data) : false;
+  }
+
+  private getPaymentFormDataFromLocalStorage(): any {
+    const data = localStorage.getItem('paymentFormData');
+    return data? JSON.parse(data) : {};
+  }
+
   clearShippingFormData() {
     this.shippingFormDataSubject.next({});
     localStorage.removeItem('shippingFormData');
     this.setShippingFormCompleted(false);
+  }
+
+  clearPaymentFormData() {
+    this.paymentFormDataSubject.next({});
+    localStorage.removeItem('paymentFormData');
+    this.setPaymentFormCompleted(false);
   }
 }
 

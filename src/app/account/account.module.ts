@@ -8,7 +8,7 @@ import { PaymentFormComponent } from './payment-form/payment-form.component';
 import { ThankyouComponent } from './thankyou/thankyou.component';
 import { DefaultComponent } from './default/default.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { ReviewOrderComponent } from './review-order/review-order.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ShippingFormComponent,
     PaymentFormComponent,
     ThankyouComponent,
-    DefaultComponent
+    DefaultComponent,
+    ReviewOrderComponent,
     
   ],
   imports: [
