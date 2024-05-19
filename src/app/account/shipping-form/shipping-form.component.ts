@@ -13,9 +13,22 @@ export class ShippingFormComponent {
 
   ngOnInit(): void {
     this.shippingForm = new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      // Aggiungi gli altri controlli del form qui con le rispettive validazioni
+      name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$'), Validators.minLength(2)]),
+      surName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$'), Validators.minLength(2)]),
+      address:  new FormControl('', [Validators.required, Validators.pattern('^[\w]{3,}[\d]{1}$'), Validators.minLength(3)]),
     });
+  }
+
+  get name() {
+    return this.shippingForm.get('name');
+  }
+
+  get surName() {
+    return this.shippingForm.get('surName');
+  }
+
+  get address() {
+    return this.shippingForm.get('address');
   }
 
   onSubmit() {

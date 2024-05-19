@@ -4,7 +4,7 @@
         <div id="cart-left-container">
             <div id="cart-container" class="mb-3">
                 <h5>Spedizione gratuita per i Member.</h5>
-                <p>Diventa Member LabAir e approfitta della spedizione rapida e gratuita. <a href="#">Unisciti a noi</a> o <a href="#">Accedi</a></p>
+                <p>Diventa Member LabAir e approfitta della spedizione rapida e gratuita. <a href="#">Unisciti a noi</a> o <a routerLink="/login">Accedi</a></p>
             </div>
             <div id="cart-items" class="p-1">
                 <h4>Carrello</h4>
@@ -107,16 +107,15 @@
             </div>
             <div class="shippingCost d-flex justify-content-between">
                 <p class="me-3">Costi di spedizione e gestione previsti</p>
-                <p>
-                    <span *ngIf="subTotal <= 90; else gratis">5€</span>
-                    <ng-template #gratis>Gratis</ng-template>
-                  </p>
+                <ng-container>
+                    <span *ngIf="subTotal !== 0">{{ subTotal <= 90 ? '5€' : 'Gratis' }}</span>
+                </ng-container>
             </div>
             
             <hr>
             <div class="total d-flex justify-content-between">
                 <p>Totale</p>
-                <p class="fw-bold">{{total | localCurrency: 'EUR'}}</p>
+                <p class="fw-bold">{{ total > 5 ? (total | currency: 'EUR') : ('0' | currency: 'EUR') }}</p>
             </div>
             <hr>
             <div class="containerButtons">

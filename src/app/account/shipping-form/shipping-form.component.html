@@ -1,14 +1,32 @@
 <form [formGroup]="shippingForm" (ngSubmit)="onSubmit()">
-  <div class="mb-3">
-    <label for="firstName" class="form-label">Nome</label>
-    <input type="text" class="form-control" id="firstName" formControlName="firstName">
-    <div *ngIf="shippingForm.get('firstName')!.invalid && (shippingForm.get('firstName')!.dirty || shippingForm.get('firstName')!.touched)" class="text-danger">
-      Nome è obbligatorio
+  <div class="mt-5 mb-4 d-flex">
+    <div class="name me-3 w-100">
+      <input type="text" class="form-control" id="name" formControlName="name" placeholder="Nome*">
+      <div *ngIf="name!.invalid && (name!.dirty || name!.touched)">
+        <span class="text-danger fs-6 mt-2 ms-1">
+          {{ name!.errors?.['required'] ? 'Nome obbligatorio' : (name!.errors?.['minlength'] ? 'Inserire almeno 3 caratteri' : (name!.errors?.['pattern'] ? 'Inserire un nome valido' : '')) }}
+        </span>
+      </div>
+    </div>
+    <div class="surname w-100">
+      <input type="text" class="form-control" id="surName" formControlName="surName" placeholder="Cognome*">
+      <div *ngIf="surName!.invalid && (surName!.dirty || surName!.touched)">
+        <span class="text-danger fs-6 mt-2 ms-1">
+          {{ surName!.errors?.['required'] ? 'Cognome obbligatorio' : (surName!.errors?.['minlength'] ? 'Inserire almeno 3 caratteri' : (surName!.errors?.['pattern'] ? 'Inserire un cognome valido' : '')) }}
+        </span>
+      </div>
     </div>
   </div>
-  <!-- Aggiungi gli altri campi del form qui con le rispettive validazioni -->
-
-  <button type="submit" class="btn btn-primary">Salva e continua</button>
+  <input type="text" class="form-control" id="address" formControlName="address" placeholder="Via e numero civico*">
+  <div *ngIf="address!.invalid && (address!.dirty || address!.touched)">
+    <span class="text-danger fs-6 mt-2 ms-1">
+      {{ address!.errors?.['required'] ? 'Via e numero civico sono obbligatori' : (address!.errors?.['minlength'] ? 'Inserire almeno 4 caratteri' : (address!.errors?.['pattern'] ? 'Inserire un indirizzo valido' : '')) }}
+    </span>
+  </div>
+  
+  <button type="submit" class="btn btn-dark mt-4
+  ">Salva e continua</button>
 </form>
+
 
 
