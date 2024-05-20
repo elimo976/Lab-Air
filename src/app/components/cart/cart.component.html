@@ -102,7 +102,14 @@
                 </div>
               </div>
             <div class="subtotal d-flex justify-content-between">
-                <p>Subtotale</p>
+                <p>Subtotale<i class="bi bi-question-circle-fill ms-2"
+                    triggers="click"
+                    [autoClose]="true"
+                    ngbTooltip="Il subtotale riflette il prezzo complessivo dell'ordine prima dell'applicazione di eventuali sconti. Le spese di spedizione non sono incluse."
+                    tooltipClass="p-1"
+                    placement="bottom"
+                    #tooltip3="ngbTooltip"
+                    ></i></p>
                 <p>{{subTotal | localCurrency: 'EUR'}}</p>
             </div>
             <div class="shippingCost d-flex justify-content-between">
