@@ -1,0 +1,85 @@
+#logo {
+    width: 60px;
+}
+
+#logo img {
+    max-width: 100%;
+    cursor: pointer;
+}
+.container {
+    width: 500px;
+    height: 500px;
+    margin: 4em auto;
+    border-radius: 50%;
+    background-color: #679d1b;
+    position: relative;
+    color: #f4f2f2;
+}
+#thankyou {
+    position: absolute;
+    top: 32%;
+    left: 12%;
+}
+
+#thankyou span, #thankyou a {
+    color: #424242;
+}
+
+#thankyou a:hover {
+    color: #fff;
+}
+
+footer {
+    background-color: #252525;
+    padding: 1em;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: .8rem;
+}
+
+footer a:hover {
+    color: #679d1b;
+}
+
+@media screen and (max-width: 768px) {
+    #thankyou {
+        position: absolute;
+        top: 32%;
+        left: 14%;
+        color: #ffffff;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        width: 290px;
+        height: 290px;
+        margin: 16.5em auto 0 auto;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    #thankyou {
+        position: absolute;
+        top: 29%;
+        left: 12%;
+        color: #ffffff;
+        font-size: .8rem;
+    }
+
+    #thankyou h3, #thanksyou p {
+        font-size: 1rem;
+    }
+
+    footer {
+        position: absolute;
+        bottom: 0;
+    }
+
+    footer a {
+        font-size: .6rem;
+    }
+}

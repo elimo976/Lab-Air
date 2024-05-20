@@ -10,3 +10,18 @@
 .container p, .container span {
     color: #808080;
 }
+
+.itemCart img {
+    width: 60px;
+}
+
+.order-details ul {
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .order-details {
+        width: 100% !important;
+    }
+}

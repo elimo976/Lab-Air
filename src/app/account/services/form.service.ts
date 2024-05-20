@@ -148,16 +148,23 @@ export class FormService {
     return data ? JSON.parse(data) : {};
   }
 
-  clearShippingFormData() {
-    this.shippingFormDataSubject.next({});
-    localStorage.removeItem('shippingFormData');
-    this.setShippingFormCompleted(false);
-  }
+  // clearShippingFormData() {
+  //   this.shippingFormDataSubject.next({});
+  //   localStorage.removeItem('shippingFormData');
+  //   this.setShippingFormCompleted(false);
+  // }
 
-  clearPaymentFormData() {
-    this.paymentFormDataSubject.next({});
+  // clearPaymentFormData() {
+  //   this.paymentFormDataSubject.next({});
+  //   localStorage.removeItem('paymentFormData');
+  //   this.setPaymentFormCompleted(false);
+  // }
+
+  clearLocalStorage() {
+    localStorage.removeItem('shippingFormCompleted');
+    localStorage.removeItem('shippingFormData');
+    localStorage.removeItem('paymentFormCompleted');
     localStorage.removeItem('paymentFormData');
-    this.setPaymentFormCompleted(false);
   }
 
   private maskCardNumber(cardNumber: string): string {
