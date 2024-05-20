@@ -32,3 +32,7 @@
     width: 23.5em;
     padding-left: 0;
 }
+
+#arrows i {
+    cursor: pointer;
+}

@@ -9,6 +9,7 @@ import { ThankyouComponent } from './thankyou/thankyou.component';
 import { DefaultComponent } from './default/default.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReviewOrderComponent } from './review-order/review-order.component';
+import { CapitalizeFirstPipe } from './pipes/capitalize-first.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ReviewOrderComponent } from './review-order/review-order.component';
     ThankyouComponent,
     DefaultComponent,
     ReviewOrderComponent,
+    CapitalizeFirstPipe,
     
   ],
   imports: [

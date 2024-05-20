@@ -1,3 +1,19 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    flex: 1;
+}
+
 #logo {
     width: 60px;
 }
@@ -6,6 +22,7 @@
     max-width: 100%;
     cursor: pointer;
 }
+
 .container {
     width: 500px;
     height: 500px;
@@ -15,38 +32,38 @@
     position: relative;
     color: #f4f2f2;
 }
-#thankyou {
+
+#thankyouBox {
     position: absolute;
     top: 32%;
     left: 12%;
 }
 
-#thankyou span, #thankyou a {
+#thankyouBox span, #thankyouBox a {
     color: #424242;
 }
 
-#thankyou a:hover {
+#thankyouBox a:hover {
     color: #fff;
 }
 
-footer {
+#miniFooter {
     background-color: #252525;
-    padding: 1em;
+    padding: 1em 0;
 }
 
-footer a {
+#miniFooter a {
     color: #ffffff;
     text-decoration: none;
     font-size: .8rem;
 }
 
-footer a:hover {
+#miniFooter a:hover {
     color: #679d1b;
 }
 
 @media screen and (max-width: 768px) {
-    #thankyou {
-        position: absolute;
+    #thankyouBox {
         top: 32%;
         left: 14%;
         color: #ffffff;
@@ -59,27 +76,20 @@ footer a:hover {
         height: 290px;
         margin: 16.5em auto 0 auto;
         border-radius: 50%;
-        position: relative;
     }
 
-    #thankyou {
-        position: absolute;
+    #thankyouBox {
         top: 29%;
         left: 12%;
         color: #ffffff;
         font-size: .8rem;
     }
 
-    #thankyou h3, #thanksyou p {
+    #thankyouBox h3, #thankyouBox p {
         font-size: 1rem;
     }
 
-    footer {
-        position: absolute;
-        bottom: 0;
-    }
-
-    footer a {
+    #miniFooter a {
         font-size: .6rem;
     }
 }

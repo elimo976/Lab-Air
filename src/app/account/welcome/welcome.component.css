@@ -1,3 +1,10 @@
+.headerAccount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap; /* Assicura che gli elementi non si avvolgano */
+}
+
 .headerAccount a {
     color: #679d1b;
 }
@@ -6,16 +13,16 @@
     color: #679d1bab;
 }
 
-.logo {
+#logo {
     width: 60px;
 }
 
-.logo img {
+#logo img {
     max-width: 100%;
     cursor: pointer;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
     .container {
         margin-top: 5em;
     }
@@ -23,11 +30,5 @@
     .container button {
         padding: 6px 12px;
         font-size: 1rem;
-    }
-
-    .logo {
-        position: absolute;
-        top: 0;
-        left: 0;
     }
 }
