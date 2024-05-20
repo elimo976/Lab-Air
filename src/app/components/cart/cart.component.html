@@ -119,7 +119,7 @@
             </div>
             <hr>
             <div class="containerButtons">
-                <button type="button" class="btn btn-dark cart" routerLink="/login">Vai al pagamento</button>
+                <button type="button" class="btn btn-dark cart" (click)="handlePayment()">Vai al pagamento</button>
                 <button id="paypal" type="button" class="btn btn-outline-secondary paypal" (click)="redirectToLinkPayPal()"><i class="bi bi-paypal"></i></button>
             </div>
         </div>

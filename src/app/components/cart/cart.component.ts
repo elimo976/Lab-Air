@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { IProduct } from 'src/app/models/product';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -13,7 +15,11 @@ export class CartComponent {
   subTotal: number = 0;
   total: number = 0;
 
-  constructor(private cs: CartService) { }
+  constructor(
+    private cs: CartService,
+    private as: AuthService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.cs.getCartItems()
@@ -88,7 +94,19 @@ export class CartComponent {
   redirectToLinkPayPal(){
     window.open("https://www.paypal.com/it/home", "_blank");
   }
-
+  
+  handlePayment() {
+    console.log('handlePayment called');
+    this.as.isAuthenticated()
+    .subscribe(isAuthenticated => {
+      console.log('isAuthenticated: ', isAuthenticated);
+      if (isAuthenticated) {
+        this.router.navigateByUrl('/account');
+      } else {
+        this.router.navigateByUrl('/login');
+      }
+    })
+  }
 
   LikelyFaves = [
     { title: 'Kettlebells', imageUrl: 'https://images.pexels.com/photos/221247/pexels-photo-221247.jpeg' },

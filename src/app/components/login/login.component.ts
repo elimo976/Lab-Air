@@ -14,32 +14,18 @@ interface ToastConfig {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
+  toastConfig?: ToastConfig;
+
   loginFrm = new FormGroup({
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", Validators.required)
   })
-  toastConfig?: ToastConfig
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) {}
-
-  // constructor(
-  //   private ar: ActivatedRoute
-  // ){
-  //   this.ar.queryParams.subscribe(p => {
-  //     if(p["register"]){
-  //       this.toastConfig = {
-  //         cssClass: "bg-success",
-  //         message: "Ora puoi effettuare l'accesso"
-  //       }
-  //       setTimeout(() => {
-  //         this.toastConfig = undefined
-  //       }, 3000);
-  //     }
-  //   })
-  // }
 
   login() {
     const email = this.loginFrm.get('email')?.value ?? '';

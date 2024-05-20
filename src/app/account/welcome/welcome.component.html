@@ -1,5 +1,8 @@
-<div class="logo mt-4">
-  <img src="./assets/images/logo.png" alt="Logo" routerLink="/home">
+<div class="headerAccount m-5 mb-0 d-flex justify-content-between">
+  <div class="logo">
+    <img src="./assets/images/logo.png" alt="Logo" routerLink="/home">
+  </div>
+    <a href="#" class="mt-3 me-2" (click)="logout()">Esci</a>
 </div>
 <div class="container">
   <div class="row justify-content-center mt-3">
@@ -7,7 +10,7 @@
       <div class="text-center">
         <h1 class="mb-4">Benvenuto!</h1>
         <ng-container *ngIf="currentUser">
-          <p>Benvenuto, <strong>{{currentUser}}</strong> ! Grazie per esserti unito alla LabAir Community.</p>
+          <p>Benvenuto, <strong>{{ currentUser }}</strong>! Grazie per esserti unito alla LabAir Community.</p>
         </ng-container>
         <p>Per favore, inserisci i tuoi dati di spedizione per continuare.</p>
         <button (click)="navigateToDefaultPage()" class="btn btn-dark btn-lg mt-4">Inserisci i tuoi dati</button>

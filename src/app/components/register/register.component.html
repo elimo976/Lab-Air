@@ -8,8 +8,12 @@
         > 
           {{ toastConfig.message }}
         </ngb-toast>
-        <form [formGroup]="loginFrm" (ngSubmit)="login()">
-            <h1 class="h3 mb-3 fw-normal">Accedi</h1>
+        <form [formGroup]="registerFrm" (ngSubmit)="register()">
+            <h1 class="h3 mb-3 fw-normal">Registrati</h1>
+            <div class="form-floating mb-3">
+                <input formControlName="username" type="text" class="form-control" id="username" placeholder="Nome">
+                <label for="username">Nome</label>
+              </div>
             <div class="form-floating mb-3">
               <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
               <label for="floatingInput">Email</label>
@@ -18,11 +22,9 @@
               <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
               <label for="floatingPassword">Password</label>
             </div>
-            <button [disabled]="loginFrm.invalid" class="btn btn-dark w-100 py-2" type="submit">Accedi</button>
+            <button [disabled]="registerFrm.invalid" class="btn btn-dark w-100 py-2" type="submit">Accedi</button>
             <p class="mt-5 mb-3 text-body-secondary">&copy; 2024</p>
           </form>
-          <p class="my-3">
-            <a class="text-body-secondary" routerLink="/register">Non hai un account? Registrati</a>
-          </p>
     </div>
 </div>
+<app-footer></app-footer>

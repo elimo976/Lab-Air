@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormService } from '../services/form.service';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-review-order',
@@ -19,7 +20,9 @@ export class ReviewOrderComponent {
   constructor(
     private formService: FormService,
     private cartService: CartService,
-    private route: Router) {}
+    private router: Router,
+    private authService: AuthService)
+    { }
 
   ngOnInit(): void {
     this.shippingData = this.formService.getShippingFormData();
@@ -45,7 +48,13 @@ export class ReviewOrderComponent {
     this.formService.setShippingFormData({});
     this.formService.setPaymentFormData({});
     this.cartService.clearCart();
-    this.route.navigateByUrl('/account/thankyou')
+    this.logout();
+    this.router.navigateByUrl('/account/thankyou')
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/');
   }
 
 }

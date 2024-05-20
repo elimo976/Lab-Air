@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormService } from '../services/form.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-default',
@@ -14,7 +15,8 @@ export class DefaultComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private formService: FormService
+    private formService: FormService,
+    private authService: AuthService
   ) {
     this.formService.shippingFormCompleted$.subscribe(completed => {
       this.shippingFormCompleted = completed;
@@ -29,6 +31,11 @@ export class DefaultComponent {
 
   onShippingFormSubmitted() {
     this.shippingFormCompleted = true;
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/');
   }
 }
 

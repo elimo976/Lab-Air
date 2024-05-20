@@ -17,9 +17,6 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      const email = route.queryParams['email'];
-      const password = route.queryParams['password'];
-
     return this.authService.isAuthenticated().pipe(
       map((authenticated: boolean) => {
         if (authenticated) {
@@ -27,9 +24,6 @@ export class AuthGuard implements CanActivate {
         } else {
           return this.router.createUrlTree(['/account/login']);
         }
-      }),
-      catchError(() => {
-        return of(this.router.createUrlTree(['/account/login']));
       })
     );
   }

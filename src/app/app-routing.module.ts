@@ -8,6 +8,7 @@ import { ProductsPreviewComponent } from './components/products-preview/products
 import { CartComponent } from './components/cart/cart.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth.guard';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -27,6 +28,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import("./account/account.module").then(m => m.AccountModule)
   },
+  { path: 'register', component: RegisterComponent }
 ];
 
 @NgModule({

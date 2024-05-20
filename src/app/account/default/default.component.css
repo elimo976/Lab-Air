@@ -1,3 +1,11 @@
+.headerAccount a {
+    color: #679d1b;
+}
+
+.headerAccount a:hover {
+    color: #679d1bab;
+}
+
 #logo {
     width: 60px;
 }

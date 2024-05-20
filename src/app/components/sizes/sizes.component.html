@@ -48,7 +48,7 @@
         </div>
         <div id="fasciaDown" class="clearfix">
             <button id="addToCart"  routerLink="/cart">Visualizza carrello ({{ countSelectedSizes() }})</button>
-            <button id="goToPay" routerLink="/login">Pagamento</button>
+            <button id="goToPay" (click)="handlePayment()">Pagamento</button>
         </div>
     </section>
 </div>

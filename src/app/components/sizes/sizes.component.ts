@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { CartModalComponent } from '../cart-modal/cart-modal.component';
 import { CartService } from 'src/app/services/cart.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sizes',
@@ -41,6 +42,8 @@ export class SizesComponent {
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private cs: CartService,
+    private as: AuthService,
+    private router: Router
   ) { }
 
 
@@ -107,5 +110,18 @@ export class SizesComponent {
   openCartLimitModal() {
     const modalRef = this.modalService.open(CartModalComponent);
     modalRef.componentInstance.message = 'Hai raggiunto il limite massimo di 3 articoli';
+  }
+
+  handlePayment() {
+    console.log('handlePayment called');
+    this.as.isAuthenticated()
+    .subscribe(isAuthenticated => {
+      console.log('isAuthenticated: ', isAuthenticated);
+      if (isAuthenticated) {
+        this.router.navigateByUrl('/account');
+      } else {
+        this.router.navigateByUrl('/login');
+      }
+    })
   }
 }

@@ -7,6 +7,15 @@
     cursor: pointer;
 }
 
+.headerAccount a {
+    color: #679d1b;
+}
+
+.headerAccount a:hover {
+    color: #679d1bab;
+}
+
+
 .container p, .container span {
     color: #808080;
 }
@@ -18,6 +27,21 @@
 .order-details ul {
     margin: 0;
     padding: 0;
+}
+
+footer {
+    background-color: #252525;
+    padding: 1em;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: .8rem;
+}
+
+footer a:hover {
+    color: #679d1b;
 }
 
 @media screen and (max-width: 768px) {

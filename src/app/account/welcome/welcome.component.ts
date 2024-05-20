@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,10 +10,12 @@ import { AuthService } from 'src/app/services/auth.service';
 export class WelcomeComponent {
 
   currentUser: string | null = null;
+  username: string | null = null;
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -24,9 +26,18 @@ export class WelcomeComponent {
       }
     })
     this.currentUser = localStorage.getItem('currentUser');
+
+      this.route.queryParams.subscribe(params => {
+      this.username = params['username'];
+    });
   }
 
   navigateToDefaultPage() {
     this.router.navigateByUrl('/account');
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/');
   }
 }
