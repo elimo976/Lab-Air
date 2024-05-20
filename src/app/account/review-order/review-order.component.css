@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 #logo {
     width: 60px;
 }
@@ -29,23 +32,27 @@
     padding: 0;
 }
 
-footer {
+#miniFooter {
     background-color: #252525;
     padding: 1em;
 }
 
-footer a {
+#miniFooter a {
     color: #ffffff;
     text-decoration: none;
     font-size: .8rem;
 }
 
-footer a:hover {
+#miniFooter a:hover {
     color: #679d1b;
 }
 
-@media screen and (max-width: 768px) {
-    .order-details {
-        width: 100% !important;
+@media screen and (max-width: 480px) {
+    .headerAccount a {
+        margin-right: 0 !important;
+    }
+
+    .headerAccount {
+        margin-bottom: 1em !important;
     }
 }

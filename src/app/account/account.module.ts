@@ -25,7 +25,7 @@ import { CapitalizeFirstPipe } from './pipes/capitalize-first.pipe';
   imports: [
     CommonModule,
     AccountRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class AccountModule { }
