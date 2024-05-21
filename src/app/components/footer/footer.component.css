@@ -179,6 +179,7 @@ footer li a:hover {
             "social social social info info info";
         background-color: #3f3f3f;
         padding: 10px;
+        font-size: .7rem;
     }
 
     #colonna1 {
@@ -199,6 +200,11 @@ footer li a:hover {
     #colonna4 {
         grid-area: social;
         width: 100%;
+        font-size: 1rem;
+    }
+
+    #colonna4 li {
+        margin: .5rem;
     }
 
     #colonna5 {

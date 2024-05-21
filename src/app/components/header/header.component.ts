@@ -13,7 +13,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class HeaderComponent {
 
   microbannersTexts: string[] = [
-    "Spedizione gratuita per gli ordini superiori a 50 €",
+    "Spedizione gratuita per gli ordini superiori a 90 €",
     "Iscriviti alla nostra Newsletter per accedere a sconti e promozioni imperdibili",
     "Non perderti la nuova collezione primavera estate"
   ];

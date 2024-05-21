@@ -26,7 +26,7 @@
                     <input type="text" class="form-control" id="creditCardNumber" formControlName="creditCardNumber" placeholder="Numero carta">
                     <div *ngIf="creditCardNumber!.invalid && (creditCardNumber!.dirty || creditCardNumber!.touched)">
                         <span class="text-danger fs-6 mt-2 ms-1">
-                            {{ creditCardNumber!.errors?.['required'] ? 'Numero carta obbligatorio' : (creditCardNumber!.errors?.['minlength'] ? 'Inserire almeno 16 caratteri' : (creditCardNumber!.errors?.['pattern'] ? 'Inserire numero di carta valido' : '')) }}
+                            {{ creditCardNumber!.errors?.['required'] ? 'Numero carta obbligatorio' : (creditCardNumber!.errors?.['minlength'] ? 'Inserire 16 caratteri' : (creditCardNumber!.errors?.['pattern'] ? 'Inserire numero di carta valido' : '')) }}
                         </span>
                     </div>
                 </div>

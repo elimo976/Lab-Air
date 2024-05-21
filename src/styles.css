@@ -19,7 +19,7 @@ body {
     background-color: #fff;
 }
 
-.header-container {
+header {
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     position: relative;
@@ -315,7 +315,7 @@ li.submenu-item a:hover {
   }
 
 @media screen and (max-width: 768px) {
-    .header-container {
+    header {
         display: flex;
         flex-direction: column;
         min-height: 11em;
@@ -422,7 +422,7 @@ li.submenu-item a:hover {
 }
 
 @media screen and (max-width: 480px) {
-    .header-container {
+    header {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -464,7 +464,6 @@ li.submenu-item a:hover {
         align-items: center;
         margin: 12.5em auto 0 auto;
         display: flex;
-
     }
 
     .main-menu ul {
@@ -488,6 +487,10 @@ li.submenu-item a:hover {
         width: 100%;
         text-align: center;
         padding: 10px 0 0 0;
+    }
+
+    .menu-list {
+        width: 96.5vw;
     }
 
     .menu-list :hover {
@@ -518,7 +521,7 @@ li.submenu-item a:hover {
     }
 
     .header-content {
-        width: 100vw;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -537,9 +540,10 @@ li.submenu-item a:hover {
         top: 90%;
     }
 
-    .right-side input {
-        font-size: .8rem;
-    }
+    .search-input {
+        background-image: none;
+        font-size: .7rem;
+      }
 
     .sub-container {
         display: none;
